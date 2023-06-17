@@ -96,7 +96,7 @@
         })
       }
     </script>
-    <script src="./Hishida.js"></script>
+    <script src="./month.js"></script>
     <script src="./week.js"></script>
 </body>
 
