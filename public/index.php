@@ -8,5 +8,9 @@
 </head>
 <body>
     <h1>タグ付け勉強記録</h1>
+    <form method="post">
+        <input type="text">
+        <input type="submit" value="add" class="tag_add">
+    </form>
 </body>
 </html>
