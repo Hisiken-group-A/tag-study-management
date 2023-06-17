@@ -14,7 +14,7 @@
     margin: 0;
   }
   
-  .tab_menu-item {
+  .tab_menu_item {
     list-style: none;
     width: 200px;
     padding: 8px 5px; /* メニューに高さを付ける */
@@ -27,12 +27,12 @@
     transition: all .3s; /* アニメーション */
   }
   
-  .tab_menu-item:last-of-type {
+  .tab_menu_item:last-of-type {
     margin-right: 0px;
   }
   
   /* is-activeがついている時のスタイル */
-  .tab_menu-item.is-active {
+  .tab_menu_item.is_active {
     background-color: rgba(48, 172, 249);
     color: #ffffff;
     padding: 12px 5px;
@@ -43,29 +43,29 @@
    width: 100%;
   }
   
-  .tab_panel-box {
+  .tab_panel_box {
     min-height: 400px;
     padding: 10px 30px;
     border-radius: 10px;
   }
   
-  .tab_panel-box001 {
+  .tab_panel_box001 {
     background-color: rgb(205, 246, 246);
     display: none;
   }
   
-  .tab_panel-box002 {
+  .tab_panel_box002 {
     background-color: rgb(249 227 243);
     display: none;
   }
   
-  .tab_panel-box003 {
+  .tab_panel_box003 {
     background-color: rgb(200, 248, 195);
     display: none;
   }
   
   /* is-showがついている時のスタイル */
-  .tab_panel-box.is-show {
+  .tab_panel_box.is_show {
     display: block;
   }
   
