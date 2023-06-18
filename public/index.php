@@ -4,6 +4,22 @@ require_once '../dbconnect.php';
 
 $pdo = connect();
 
+//タグ追加フォームを打ち込んだとき
+if (!empty($_POST['add_tag_button'])) {
+    try {
+        $stmt = $pdo->prepare("INSERT INTO tag (tag_name) VALUES (:title)");
+        $stmt->bindValue('title', $_POST['tag_name'], \PDO::PARAM_STR);//(文字列として)
+        $stmt->execute();
+
+        header('Location: index.php');
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+}
+
+$stmt = $pdo->query("SELECT * FROM tag");
+$tags = $stmt->fetchAll();
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -23,19 +39,29 @@ $pdo = connect();
                 <li class="tab_menu_item" data-tab="Week">週</li>
                 <li class="tab_menu_item" data-tab="Month">月</li>
             </ul>
-
-
         <div class="tab_panel">
-            <div class="tab_panel_box tab_panel_box001 is_show" data-tab="Select">
-            <form action="check_login.php" method="post">
+
+        <div class="tab_panel_box tab_panel_box001 is_show" data-tab="Select">
+            <!-- タグ追加フォーム -->
+            <form method="post">
                 タグの追加
-                <br><input type="text" id="intext"><br>
+                <br><input type="text" id="intext" name="tag_name"><br>
+                <input type="submit" name="add_tag_button" value="追加">
+            </form>
+            <!-- 勉強時間入力フォーム -->
+            <form action="check_login.php" method="post" name="a">
                 <!--<textarea id="message" col="400" rows="5"></textarea> -->
                 勉強時間入力
+                <select name="tag_name">
+                    <option value="">タグを選択</option>
+                    <?php foreach($tags as $tag): ?>
+                    <option value="<?php echo $tag['tag_name']; ?>"><?php echo $tag['tag_name']; ?></option>
+                    <?php endforeach; ?>
+                </select>
                 <br><input type="text" id="intext"><br>
                 <input type="submit" value="決定">
             </form>
-            </div>
+        </div>
 
         <div class="tab_panel_box tab_panel_box002" data-tab="Graph">
             <ul class="Graphmaterial">
