@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Study management</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/index.css">
 </head>
 
 <body>
@@ -96,8 +96,8 @@
         })
       }
     </script>
-    <script src="./month.js"></script>
-    <script src="./week.js"></script>
+    <script src="../js/month.js"></script>
+    <script src="../js/week.js"></script>
 </body>
 
 </html>
