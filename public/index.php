@@ -1,3 +1,10 @@
+<?php
+
+require_once '../dbconnect.php'; 
+
+$pdo = connect();
+
+?>
 <!DOCTYPE html>
 <html lang="ja">
 
