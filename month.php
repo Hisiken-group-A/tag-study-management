@@ -14,14 +14,7 @@
                 <li class="Month"><a href="month.php">月</a></li>
             </ul>
 </div>
-<form action="tag_name.php" method="post" name="tag_name">
-                タグの追加
-                <br><input type="text" name="tag_add" placeholder="例）数学"><br>
-                勉強時間入力
-                <br><input type="text" name="tag_study" placeholder="例）数学">
-                <input type="number" name="hour" min="0" max="23">h
-                <input type="number" name="minute" min="0" max="59">m<br>
-                <input type="submit" value="決定">
-            </form>
+<div id="calender"></div>
+<script src="./month.js"></script>
 </body>
 </html>
