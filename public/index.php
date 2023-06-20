@@ -20,6 +20,26 @@ if (!empty($_POST['add_tag_button'])) {
 $stmt = $pdo->query("SELECT * FROM tag");
 $tags = $stmt->fetchAll();
 
+//勉強時間入力フォームを打ち込んだとき
+if (!empty($_POST['tag_name']) && !empty($_POST['hour']) && !empty($_POST['minute'])) {
+    try {
+        //○時間○分を○分間に変換
+        $minute_time = (int)$_POST['hour'] * 60 + (int)$_POST['minute'];
+        $minute_time = (string)$minute_time;
+        //選択されたtagのidの取得とdateの取得の方法がわからないため追加されるかの確認でid=1とdate=now()を仮として使ってる状態
+        $id = 1;
+        $sql = "INSERT INTO study_time (study_time, date, tag_id) VALUES (:study_time, now(), :tag_id)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(':study_time', $minute_time, PDO::PARAM_STR); //文字列として
+        $stmt->bindValue(':tag_id', $id, PDO::PARAM_INT); 
+        $stmt->execute();
+
+        header('Location: index.php');
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+} 
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -47,7 +67,8 @@ $tags = $stmt->fetchAll();
                 <input type="submit" name="add_tag_button" value="追加">
             </form>
             <!-- 勉強時間入力フォーム -->
-            <form action="check_login.php" method="post" name="a">
+            <!-- <form action="check_login.php" method="post" name="a"> -->
+            <form action="#" method="post" name="a">
                 <!--<textarea id="message" col="400" rows="5"></textarea> -->
                 勉強時間入力
                 <select name="tag_name">
