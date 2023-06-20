@@ -27,21 +27,19 @@ $tags = $stmt->fetchAll();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study management</title>
+    <title>TAG-STUDY-MANAGEMENT</title>
     <link rel="stylesheet" href="../css/index.css">
 </head>
 
 <body>
-        <div class="tab">
+<div class="tab">
             <ul class="tab_menu">
-                <li class="tab_menu_item is_active" data-tab="Select">入力</li>
-                <li class="tab_menu_item" data-tab="Graph">グラフ</li>
-                <li class="tab_menu_item" data-tab="Week">週</li>
-                <li class="tab_menu_item" data-tab="Month">月</li>
+                <li class="Index"><a href="index.php">入力</a></li>
+                <li class="Graph"><a href="graph.php">グラフ</a></li>
+                <li class="Week"><a href="week.php">週</a></li>
+                <li class="Month"><a href="month.php">月</a></li>
             </ul>
-        <div class="tab_panel">
-
-        <div class="tab_panel_box tab_panel_box001 is_show" data-tab="Select">
+</div>
             <!-- タグ追加フォーム -->
             <form method="post">
                 タグの追加
@@ -58,79 +56,13 @@ $tags = $stmt->fetchAll();
                     <option value="<?php echo $tag['tag_name']; ?>"><?php echo $tag['tag_name']; ?></option>
                     <?php endforeach; ?>
                 </select>
-                <br><input type="text" id="intext"><br>
+                <br>
+                <input type="number" name="hour" min="0" max="23">h
+                <input type="number" name="minute" min="0" max="59">m
+                <br>
                 <input type="submit" value="決定">
             </form>
-        </div>
-
-        <div class="tab_panel_box tab_panel_box002" data-tab="Graph">
-            <ul class="Graphmaterial">
-                <li><a href="BouGraph"></a>棒グラフ</li>
-                <li><a href="WariaiGraph"></a>割合円グラフ</li>
-            </ul>
-        </div>
-
-        <div class="tab_panel_box tab_panel_box003" data-tab="Week">
-          <p class="tab_panel_text">
-            <div id="WeekCal"></div>
-          </p>
-        </div>
-
-        <div class="tab_panel_box tab_panel_box004" data-tab="Month">
-              <!-- The corrected placement of the div -->
-              <div id="calender"></div>
-      </div>
-  </div>
-</div>
     <a href="./edit.html">編集画面へ移動（確認用）</a>
-    <script>
-      'use strict';
-    
-      // DOM取得
-      const tabMenus = document.querySelectorAll('.tab_menu_item');
-      console.log(tabMenus);
-    
-      // イベント付加
-      tabMenus.forEach((tabMenu) => {
-        tabMenu.addEventListener('click', tabSwitch);
-      })
-    
-      // イベントの処理
-      function tabSwitch(e) {
-        // クリックされた要素のデータ属性を取得
-        const tabTargetData = e.currentTarget.dataset.tab;
-    
-        // クリックされた要素の親要素と、その子要素を取得
-        const tabList = e.currentTarget.closest('.tab_menu');
-        console.log(tabList);
-        const tabItems = tabList.querySelectorAll('.tab_menu_item');
-        console.log(tabItems);
-    
-        // クリックされた要素の親要素の兄弟要素の子要素を取得
-        const tabPanelItems = tabList.nextElementSibling.querySelectorAll('.tab_panel_box');
-        console.log(tabPanelItems);
-    
-        // クリックされたtabの同階層のmenuとpanelのクラスを削除
-        tabItems.forEach((tabItem) => {
-          tabItem.classList.remove('is_active');
-        })
-        tabPanelItems.forEach((tabPanelItem) => {
-          tabPanelItem.classList.remove('is_show');
-        })
-    
-        // クリックされたmenu要素にis-activeクラスを付加
-        e.currentTarget.classList.add('is_active');
-    
-        // クリックしたmenuのデータ属性と等しい値を持つパネルにis-showクラスを付加
-        tabPanelItems.forEach((tabPanelItem) => {
-          if (tabPanelItem.dataset.tab === tabTargetData) {
-            tabPanelItem.classList.add('is_show');
-          }
-        })
-      }
-    </script>
-    <script src="../js/month.js"></script>
-    <script src="../js/week.js"></script>
 </body>
 
 </html>
