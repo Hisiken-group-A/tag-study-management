@@ -47,19 +47,20 @@ if (!empty($_POST['tag_name']) && !empty($_POST['hour']) && !empty($_POST['minut
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TAG-STUDY-MANAGEMENT</title>
+    <link rel="stylesheet" href="../css/index.css">
+
 </head>
 <body>
 
-  <div class="tab">
-      <ul class="tab_menu">
-        <li class="Index"><a href="index.php">入力</a></li>
-        <li class="Graph"><a href="graph.php">グラフ</a></li>
-        <li class="Week"><a href="week.php">週</a></li>
-        <li class="Month"><a href="month.php">月</a></li>
-      </ul>
-      <div class="tab_panel">
+<div class="tab">
+            <ul class="tab_menu">
+                <li class="Index"><a href="index.php">入力</a></li>
+                <li class="Graph"><a href="graph.php">グラフ</a></li>
+                <li class="Week"><a href="week.php">週</a></li>
+                <li class="Month"><a href="month.php">月</a></li>
+            </ul>
+</div>
 
-        <div class="tab_panel_box tab_panel_box001 is_show" data-tab="Select">
             <!-- タグ追加フォーム -->
             <form method="post">
                 タグの追加
@@ -77,50 +78,17 @@ if (!empty($_POST['tag_name']) && !empty($_POST['hour']) && !empty($_POST['minut
                     <option value="<?php echo $tag['tag_name']; ?>"><?php echo $tag['tag_name']; ?></option>
                     <?php endforeach; ?>
                 </select>
+                <br>
                 <input type="number" name="hour" min="0" max="23">h
-                <input type="number" name="minute" min="0" max="59">m<br>
+                <input type="number" name="minute" min="0" max="59">m
+                <br>
                 <input type="submit" value="決定">
             </form>
-        </div>
-
-        <div class="tab_panel_box tab_panel_box002" data-tab="Graph">
-            <ul class="Graphmaterial">
-                <li><a href="BouGraph"></a>棒グラフ</li>
-                <li><a href="WariaiGraph"></a>割合円グラフ</li>
-            </ul>
-        </div>
-
-        <div class="tab_panel_box tab_panel_box003" data-tab="Week">
-          <p class="tab_panel_text">
-            <div id="WeekCal"></div>
-          </p>
-        </div>
-
-        <div class="tab_panel_box tab_panel_box004" data-tab="Month">
-              <!-- The corrected placement of the div -->
-              <div id="calender"></div>
-      </div>
-  </div>
-
-</div>
-    <!-- タグ追加フォーム -->
-    <form method="post">
-        タグの追加
-        <br><input type="text"name="tag_name" placeholder="例）数学"><br>
-        <input type="submit" name="add_tag_button" value="追加">
-    </form>
-    <!-- 勉強時間入力フォーム -->
-    <form action="tag_name.php" method="post" name="tag_name">
-        勉強時間入力
-        <select name="tag_name">
-            <option value="">タグを選択</option>
-            <?php foreach($tags as $tag): ?>
-            <option value="<?php echo $tag['tag_name']; ?>"><?php echo $tag['tag_name']; ?></option>
-            <?php endforeach; ?>
-        </select>
-        <input type="number" name="hour" min="0" max="23">h
-        <input type="number" name="minute" min="0" max="59">m<br>
-        <input type="submit" value="決定">
-    </form>
+    <a href="./edit.html">編集画面へ移動（確認用）</a>
 </body>
+
 </html>
+<!--今井-->
+<!-- 小松 -->
+<!-- 淺川 -->
+<!--amano pra-->
