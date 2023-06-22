@@ -20,18 +20,24 @@ if (!empty($_POST['add_tag_button'])) {
 $stmt = $pdo->query("SELECT * FROM tag");
 $tags = $stmt->fetchAll();
 
+//日本の東京時間に設定
+date_default_timezone_set("Asia/Tokyo");
+
 //勉強時間入力フォームを打ち込んだとき
 if (!empty($_POST['tag_name']) && !empty($_POST['hour']) && !empty($_POST['minute'])) {
     try {
+        $tag_id = $_POST['tag_name'];
+        $date = $_POST['date'];
+        
         //○時間○分を○分間に変換
         $minute_time = (int)$_POST['hour'] * 60 + (int)$_POST['minute'];
         $minute_time = (string)$minute_time;
-        //選択されたtagのidの取得とdateの取得の方法がわからないため追加されるかの確認でid=1とdate=now()を仮として使ってる状態
-        $id = 1;
-        $sql = "INSERT INTO study_time (study_time, date, tag_id) VALUES (:study_time, now(), :tag_id)";
+
+        $sql = "INSERT INTO study_time (study_time, date, tag_id) VALUES (:study_time, :date, :tag_id)";
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(':study_time', $minute_time, PDO::PARAM_STR); //文字列として
-        $stmt->bindValue(':tag_id', $id, PDO::PARAM_INT); 
+        $stmt->bindValue(':date', $date, PDO::PARAM_STR);
+        $stmt->bindValue(':tag_id', $tag_id, PDO::PARAM_STR); 
         $stmt->execute();
 
         header('Location: index.php');
@@ -75,10 +81,13 @@ if (!empty($_POST['tag_name']) && !empty($_POST['hour']) && !empty($_POST['minut
                 <select name="tag_name">
                     <option value="">タグを選択</option>
                     <?php foreach($tags as $tag): ?>
-                    <option value="<?php echo $tag['tag_name']; ?>"><?php echo $tag['tag_name']; ?></option>
+                    <option value="<?php echo $tag['id']; ?>"><?php echo $tag['tag_name']; ?></option>
                     <?php endforeach; ?>
                 </select>
-                <br>
+
+              
+                <input type="hidden" name="date" value="<?php echo date("Y-m-d H:i:s"); ?>">
+
                 <input type="number" name="hour" min="0" max="23">h
                 <input type="number" name="minute" min="0" max="59">m
                 <br>
