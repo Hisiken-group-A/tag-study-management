@@ -43,15 +43,15 @@ if (!empty($_POST['tag_name']) && !empty($_POST['hour']) && !empty($_POST['minut
 ?>
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TAG-STUDY-MANAGEMENT</title>
     <link rel="stylesheet" href="../css/index.css">
-</head>
 
+</head>
 <body>
+
 <div class="tab">
             <ul class="tab_menu">
                 <li class="Index"><a href="index.php">入力</a></li>
@@ -60,6 +60,7 @@ if (!empty($_POST['tag_name']) && !empty($_POST['hour']) && !empty($_POST['minut
                 <li class="Month"><a href="month.php">月</a></li>
             </ul>
 </div>
+
             <!-- タグ追加フォーム -->
             <form method="post">
                 タグの追加
