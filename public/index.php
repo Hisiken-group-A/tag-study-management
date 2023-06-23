@@ -1,24 +1,12 @@
 <?php
 
 require_once '../config/dbconnect.php'; 
+require_once '../class/Tag.php';
 
 $pdo = connect();
-
-//タグ追加フォームを打ち込んだとき
-if (!empty($_POST['add_tag_button'])) {
-    try {
-        $stmt = $pdo->prepare("INSERT INTO tag (tag_name) VALUES (:title)");
-        $stmt->bindValue('title', $_POST['tag_name'], \PDO::PARAM_STR);//(文字列として)
-        $stmt->execute();
-
-        header('Location: index.php');
-    } catch (PDOException $e) {
-        echo $e->getMessage();
-    }
-}
-
-$stmt = $pdo->query("SELECT * FROM tag");
-$tags = $stmt->fetchAll();
+$tag = new Tag($pdo);
+$tag->process_post();
+$tags = $tag->get_tag();
 
 //日本の東京時間に設定
 date_default_timezone_set("Asia/Tokyo");
@@ -67,11 +55,24 @@ if (!empty($_POST['tag_name']) && !empty($_POST['hour']) && !empty($_POST['minut
 </div>
 
 <!-- タグ追加フォーム -->
-<form method="post">
+<form action="?action=add_tag" method="post">
     タグの追加
     <br><input type="text" id="intext" name="tag_name"><br>
-    <input type="submit" name="add_tag_button" value="追加">
+    <input type="submit" value="追加">
 </form>
+
+<!-- タグ編集・削除フォーム -->
+<form action="?action=change_or_delete" method="post">
+  <select name="tag_id">
+      タグを選択
+      <option value="">タグを選択</option>
+      <?php foreach($tags as $tag): ?>
+      <option value="<?php echo $tag['id']; ?>"><?php echo $tag['tag_name']; ?></option>
+      <?php endforeach; ?>
+  </select>
+  <input type="submit" value="削除" name="change_or_delete">
+</form>
+
 <!-- 勉強時間入力フォーム -->
 <form action="#" method="post" name="a">
     勉強時間入力
