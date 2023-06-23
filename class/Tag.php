@@ -21,11 +21,9 @@ class Tag{
             case 'add_tag':
             $this->add_tag();
             break;
-            case 'change_tag':
-            $this->change_tag();
-            break;
-            case 'delete_tag':
-            $this->delete_tag();
+            case 'change_or_delete':
+                if($_POST['change_or_delete']==='変更') $this->change_tag();
+                if($_POST['change_or_delete']==='削除') $this->delete_tag();
             break;
             default:
             exit;
@@ -36,7 +34,7 @@ class Tag{
     }
 
     /**
-     * タグ追加フォームを打ち込んだとき
+     * タグを追加
      * @param void
      * @return void
      */
@@ -50,13 +48,50 @@ class Tag{
             echo $e->getMessage();
         }
     }
+
     /**
-     * タグを取得
+     * タグの変更
+     * @param void
+     * @return void
+     */
+    public function change_tag(){
+        echo "変更";
+        // try {
+        //     $stmt = $this->pdo->prepare("UPDATE tag SET tag_name = :tag_name) WHERE id = tag_id");
+        //     $stmt->bindValue('tag_name', $_POST['tag_name'], \PDO::PARAM_STR);//(文字列として)
+        //     $stmt->bindValue('tag_id', $_POST['tag_id    '], \PDO::PARAM_STR);//(文字列として)
+        //     $stmt->execute();
+        //     header('Location: index.php');
+        // } catch (PDOException $e) {
+        //     echo $e->getMessage();
+        // }
+    }
+
+    /**
+     * タグの削除
+     * @param void
+     * @return void
+     */
+    public function delete_tag(){
+        // echo "削除";
+
+        try {
+            $stmt = $this->pdo->prepare("UPDATE tag SET deleted = 1 WHERE id = :tag_id");
+            $stmt->bindValue('tag_id', $_POST['tag_id'], \PDO::PARAM_INT);//(文字列として)
+            $stmt->execute();
+            header('Location: index.php');
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    /**
+     * 削除されていないタグを取得
      * @param void
      * @return array $tags
      */
     public function get_tag(){
-        $stmt = $this->pdo->query("SELECT * FROM tag");
+        $stmt = $this->pdo->query("SELECT * FROM tag WHERE deleted = 0");
         $tags = $stmt->fetchAll();
         return $tags;
     }
