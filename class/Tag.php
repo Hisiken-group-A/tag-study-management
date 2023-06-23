@@ -11,12 +11,11 @@ class Tag{
     }
 
     /**
-     * 使用するメソッドの分岐
+     * 使用するメソッドのを判別
      */
     public function process_post(){
         if ($_SERVER['REQUEST_METHOD'] === 'POST'){
         $action = filter_input(INPUT_GET, 'action');
-        
         switch ($action){
             case 'add_tag':
             $this->add_tag();
@@ -41,7 +40,7 @@ class Tag{
     public function add_tag(){
         try {
             $stmt = $this->pdo->prepare("INSERT INTO tag (tag_name) VALUES (:tag_name)");
-            $stmt->bindValue('tag_name', $_POST['tag_name'], \PDO::PARAM_STR);//(文字列として)
+            $stmt->bindValue('tag_name', $_POST['tag_name'], \PDO::PARAM_STR);
             $stmt->execute();
             header('Location: index.php');
         } catch (PDOException $e) {
@@ -50,34 +49,14 @@ class Tag{
     }
 
     /**
-     * タグの変更
-     * @param void
-     * @return void
-     */
-    public function change_tag(){
-        echo "変更";
-        // try {
-        //     $stmt = $this->pdo->prepare("UPDATE tag SET tag_name = :tag_name) WHERE id = tag_id");
-        //     $stmt->bindValue('tag_name', $_POST['tag_name'], \PDO::PARAM_STR);//(文字列として)
-        //     $stmt->bindValue('tag_id', $_POST['tag_id    '], \PDO::PARAM_STR);//(文字列として)
-        //     $stmt->execute();
-        //     header('Location: index.php');
-        // } catch (PDOException $e) {
-        //     echo $e->getMessage();
-        // }
-    }
-
-    /**
      * タグの削除
      * @param void
      * @return void
      */
     public function delete_tag(){
-        // echo "削除";
-
         try {
             $stmt = $this->pdo->prepare("UPDATE tag SET deleted = 1 WHERE id = :tag_id");
-            $stmt->bindValue('tag_id', $_POST['tag_id'], \PDO::PARAM_INT);//(文字列として)
+            $stmt->bindValue('tag_id', $_POST['tag_id'], \PDO::PARAM_INT);
             $stmt->execute();
             header('Location: index.php');
         } catch (PDOException $e) {

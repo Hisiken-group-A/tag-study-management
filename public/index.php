@@ -58,7 +58,7 @@ if (!empty($_POST['tag_name']) && !empty($_POST['hour']) && !empty($_POST['minut
 <form action="?action=add_tag" method="post">
     タグの追加
     <br><input type="text" id="intext" name="tag_name"><br>
-    <input type="submit" name="add_tag_button" value="追加">
+    <input type="submit" value="追加">
 </form>
 
 <!-- タグ編集・削除フォーム -->
@@ -70,7 +70,6 @@ if (!empty($_POST['tag_name']) && !empty($_POST['hour']) && !empty($_POST['minut
       <option value="<?php echo $tag['id']; ?>"><?php echo $tag['tag_name']; ?></option>
       <?php endforeach; ?>
   </select>
-  <input type="submit" value="変更" name="change_or_delete">
   <input type="submit" value="削除" name="change_or_delete">
 </form>
 
