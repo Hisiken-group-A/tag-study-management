@@ -14,6 +14,10 @@
                 <li class="Month"><a href="month.php">月</a></li>
             </ul>
 </div>
+<div id="next_back_button">
+    <button id="back" onclick="back()"><</button>
+    <button id="next" onclick="next()">></button>
+</div>
 <div id="calendar"></div>
 <script src="../js/month.js"></script>
 </body>
