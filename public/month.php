@@ -14,7 +14,7 @@
                 <li class="Month"><a href="month.php">月</a></li>
             </ul>
 </div>
-<div id="calender"></div>
+<div id="calendar"></div>
 <script src="./month.js"></script>
 </body>
 </html>
