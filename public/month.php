@@ -15,6 +15,6 @@
             </ul>
 </div>
 <div id="calendar"></div>
-<script src="./month.js"></script>
+<script src="../js/month.js"></script>
 </body>
 </html>
