@@ -64,6 +64,25 @@ class Tag{
     }
 
     /**
+     * タグの変更
+     * @param void
+     * @return void
+     */
+    public function change_tag(){
+        try {
+            $stmt = $this->pdo->prepare("UPDATE tag SET tag_name = :tag_name WHERE id = :tag_id");
+            $stmt->bindValue('tag_name', $_POST['tag_name'], \PDO::PARAM_STR);
+            $stmt->bindValue('tag_id', $_POST['tag_id'], \PDO::PARAM_INT);
+            $stmt->execute();
+            header('Location: index.php');
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+
+
+    /**
      * 削除されていないタグを取得
      * @param void
      * @return array $tags
