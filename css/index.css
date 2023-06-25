@@ -1,0 +1,31 @@
+.Index{
+    z-index: 4;   
+}
+
+.Graph{
+    z-index: 3;
+}
+
+.Week{
+    z-index: 2;            
+}
+
+.Month{
+    z-index: 1;      
+}
+
+.top{
+    background-color: #C2ADC9;
+}
+
+.bottom{
+    background-color: #C2ADC9;
+}
+
+.left{
+    background-color: #C2ADC9;
+}
+
+.right{
+    background-color: #C2ADC9;
+}
