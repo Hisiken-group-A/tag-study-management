@@ -15,19 +15,18 @@ class Tag{
      */
     public function process_post(){
         if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-        $action = filter_input(INPUT_GET, 'action');
-        switch ($action){
-            case 'add_tag':
-                $this->add_tag();
-                break;
-            case 'change_or_delete':
-                if($_POST['change_or_delete']==='変更') $this->change_tag();
-                if($_POST['change_or_delete']==='削除') $this->delete_tag();
-                break;
-            default:
-                break;
-        }
-
+            $action = filter_input(INPUT_GET, 'action');
+            switch ($action){
+                case 'add_tag':
+                    $this->add_tag();
+                    break;
+                case 'change_or_delete':
+                    if($_POST['change_or_delete']==='変更') $this->change_tag();
+                    if($_POST['change_or_delete']==='削除') $this->delete_tag();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
