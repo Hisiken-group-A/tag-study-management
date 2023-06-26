@@ -49,6 +49,7 @@ if (!empty($_POST['tag_name'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TAG-STUDY-MANAGEMENT</title>
+    <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/index.css">
 </head>
 <body>
@@ -62,13 +63,25 @@ if (!empty($_POST['tag_name'])) {
     </ul>
 </div>
 
-<!-- タグ追加フォーム -->
-<form action="?action=add_tag" method="post">
-    タグの追加
-    <br><input type="text" id="intext" name="tag_name"><br>
-    <input type="submit" value="追加">
-</form>
+<div class="box">
+    <div class="top"></div>
+    <div class="bottom"></div>
+    <div class="left"></div>
+    <div class="right"></div>
+</div>
 
+<div class="main">
+    <!-- タグ追加フォーム -->
+    <form action="?action=add_tag" method="post">
+        タグの追加
+        <br><input type="text" id="intext" name="tag_name"><br>
+        <input type="submit" value="追加">
+    </form>
+
+    <!-- タグ編集・削除フォーム -->
+    <form action="?action=change_or_delete" method="post">
+    <select name="tag_id">
+        タグを選択
 <!-- タグ削除フォーム-->
 <form name="tag_edit" action="?action=change_or_delete" method="post">
     <select class="tag_edit_select" name="tag_id">
@@ -106,6 +119,7 @@ if (!empty($_POST['tag_name'])) {
         <option value="<?php echo $tag['id']; ?>"><?php echo $tag['tag_name']; ?></option>
         <?php endforeach; ?>
     </select>
+  
     <input type="hidden" name="date" value="<?php echo date("Y-m-d H:i:s"); ?>">
     <input type="number" name="hour" value="<?php echo isset($_POST['hour']) ? $_POST['hour'] : "0"; ?>" min="0" max="23" required="required">h
     <input type="number" name="minute" value="<?php echo isset($_POST['minute']) ? $_POST['minute'] : "0"; ?>" min="0" max="59" required="required">m
@@ -115,6 +129,7 @@ if (!empty($_POST['tag_name'])) {
     <input type="submit" value="決定">
 </form>
 <a href="./edit.html">編集画面へ移動（確認用）</a>
+
 
 <script src="../js/index.js"></script>
 </body>
