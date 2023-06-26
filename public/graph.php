@@ -14,5 +14,24 @@
                 <li class="Month"><a href="month.php">月</a></li>
             </ul>
 </div>
+<form>
+<div class="radio_check">
+    <input type="radio" name="graph" value="week" onclick="select_check()" checked>
+    <label class = "radio_check_label">週</label>
+</div>
+<div class="radio_check">
+    <input type="radio" name="graph" value="month" onclick="select_check()">
+    <label class = "radio_check_label">月</label>
+</div>
+</form>
+
+<div id="select_week">
+    <li>週出力</li>
+</div>
+<div id="select_month">
+    <li>月出力</li>
+</div>
+
+<script src="../js/graph.js"></script>
 </body>
 </html>
