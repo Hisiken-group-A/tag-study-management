@@ -2,3 +2,133 @@
 例　ヘッダー部，フッター部，文字サイズ，背景などなど
 今回の場合，タブで遷移するデザインを採用するのであればタブのデザインなどもここでいいかも
 */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.tab {
+    margin: auto;
+}
+
+ul{
+    padding: 0;
+    margin: auto;
+}
+
+li{
+    display: inline-block;
+    color: rgb(36, 36, 36);
+    font-size: 20px;
+    text-align: center;
+    list-style: none;
+}
+
+.tab a{
+    text-decoration-line: none;
+    color:inherit;
+}
+
+
+.Index{
+    z-index: 4;   
+	position: absolute;
+	text-decoration: none;
+    top: 10px;
+    left: 0px;  
+}
+
+.Index a {
+	background-color: #C2ADC9;
+	border: 10px solid #C2ADC9;
+    padding:  5px 198px;
+    border-top-left-radius: 100px 70px;
+    border-top-right-radius: 100px 70px;
+
+}
+
+
+.Graph{
+    z-index: 5;     
+	position: absolute;
+	text-decoration: none;
+    top: 10px;
+    left: 328px;
+}
+
+.Graph a{
+    background-color: #D9E1E2;
+	border: 10px solid #D9E1E2;
+    padding:  5px 188px;
+    border-top-left-radius: 100px 70px;
+    border-top-right-radius: 100px 70px;
+}
+
+
+.Week{
+    z-index: 2;            
+    position: absolute;
+	text-decoration: none;
+    top: 10px;
+    right: 328px;  
+}
+
+.Week a{
+    background-color: #88BFCA;
+	border: 10px solid #88BFCA;
+    padding:  5px 208px;
+    border-top-left-radius: 100px 70px;
+    border-top-right-radius: 100px 70px;
+}
+
+.Month{
+    z-index: 1;    
+    position: absolute;
+	text-decoration: none;
+    top: 10px;        
+    right: 0px;        
+}
+
+.Month a{
+    background-color: #EF90B5;
+	border: 10px solid #EF90B5;
+    padding:  5px 208px;
+    border-top-left-radius: 100px 70px;
+    border-top-right-radius: 100px 70px;
+}
+
+.top{
+    float:left;
+    position:  absolute;        
+    padding:  15px 720px;    
+    top: 50px;         
+}
+
+.bottom{
+    float:left;
+    position:  absolute;        
+    padding:  15px 720px;  
+    top: 791px;           
+}
+
+.right{
+    float:left;
+    position:  absolute;        
+    padding:  371px 15px;            
+    right:  0px;
+    top: 50px;         
+}
+
+.left{
+    float:left;
+    position:  absolute;        
+    padding:  371px 15px;             
+    left:  0px;
+    top: 50px;         
+}
+
+.main{
+    margin:130px 100px;
+}
