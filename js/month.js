@@ -36,11 +36,11 @@ function createCalendar() {
     createHtml += '<tr>';
     for (let d = 0; d < 7; d++) {
       if (n == 0 && d < firstDay) {
-        createHtml += '<td></td>';
+        createHtml += '<td class="disabled"><button class="button_click"><a href="../public/edit.php"></td></a>';
       } else if (dayCount > lastDayCount) {
-        createHtml += '<td></td>';
+        createHtml += '<td class="disabled"><button class="button_click"><a href="../public/edit.php"></td></a>';
       } else {
-        createHtml += '<td>' + dayCount + '</td>';
+        createHtml += '<td class="disabled"><button class="button_click"><a href="../public/edit.php">' + dayCount + '</td></a>';
         dayCount++;
       }
     }
