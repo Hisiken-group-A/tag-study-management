@@ -80,56 +80,52 @@ if (!empty($_POST['tag_name'])) {
 
     <!-- タグ編集・削除フォーム -->
     <form action="?action=change_or_delete" method="post">
-    <select name="tag_id">
-        タグを選択
-<!-- タグ削除フォーム-->
-<form name="tag_edit" action="?action=change_or_delete" method="post">
-    <select class="tag_edit_select" name="tag_id">
-        タグを選択
-        <option value="">タグを選択</option>
-        <?php foreach($tags as $tag): ?>
-        <option value="<?php echo $tag['id']; ?>"><?php echo $tag['tag_name']; ?></option>
-        <?php endforeach; ?>
-    </select>
-    <input type="submit" value="削除" name="change_or_delete">
-</form>
+        <!-- タグ削除フォーム-->
+        <select class="tag_edit_select" name="tag_id">
+            タグを選択
+            <option value="">タグを選択</option>
+            <?php foreach($tags as $tag): ?>
+            <option value="<?php echo $tag['id']; ?>"><?php echo $tag['tag_name']; ?></option>
+            <?php endforeach; ?>
+        </select>
+        <input type="submit" value="削除" name="change_or_delete">
+    </form>
 
-<!-- タグ編集フォーム -->
-<form action="?action=change_or_delete" method="post">
-    <div class="edit_modal_open_button">変更</div>
-    <!-- モーダル本体 -->
-    <div class="edit_modal">
-        <div class="edit_modal_container">
-            <!-- モーダルを閉じるボタン -->
-            <div class="edit_modal_close">×</div>
-            <!-- モーダル内部のコンテンツ -->
-            <div class="edit_modal_content">
-                <input type="submit" value="変更" name="change_or_delete">
+    <!-- タグ編集フォーム -->
+    <form action="?action=change_or_delete" method="post">
+        <div class="edit_modal_open_button">変更</div>
+        <!-- モーダル本体 -->
+        <div class="edit_modal">
+            <div class="edit_modal_container">
+                <!-- モーダルを閉じるボタン -->
+                <div class="edit_modal_close">×</div>
+                <!-- モーダル内部のコンテンツ -->
+                <div class="edit_modal_content">
+                    <input type="submit" value="変更" name="change_or_delete">
+                </div>
             </div>
         </div>
-    </div>
-</form>
+    </form>
   
-<!-- 勉強時間入力フォーム -->
-<form action="index.php" method="post" name="a">
-    勉強時間入力
-    <select name="tag_name">
-        <option value="">タグを選択</option>
-        <?php foreach($tags as $tag): ?>
-        <option value="<?php echo $tag['id']; ?>"><?php echo $tag['tag_name']; ?></option>
-        <?php endforeach; ?>
-    </select>
-  
-    <input type="hidden" name="date" value="<?php echo date("Y-m-d H:i:s"); ?>">
-    <input type="number" name="hour" value="<?php echo isset($_POST['hour']) ? $_POST['hour'] : "0"; ?>" min="0" max="23" required="required">h
-    <input type="number" name="minute" value="<?php echo isset($_POST['minute']) ? $_POST['minute'] : "0"; ?>" min="0" max="59" required="required">m
-    <br>
-    <!-- エラーメッセージ表示 -->
-    <div class="error_message"><?php echo $error_message; ?></div>
-    <input type="submit" value="決定">
-</form>
-<a href="./edit.html">編集画面へ移動（確認用）</a>
-
+    <!-- 勉強時間入力フォーム -->
+    <form action="index.php" method="post" name="a">
+        勉強時間入力
+        <select name="tag_name">
+            <option value="">タグを選択</option>
+            <?php foreach($tags as $tag): ?>
+            <option value="<?php echo $tag['id']; ?>"><?php echo $tag['tag_name']; ?></option>
+            <?php endforeach; ?>
+        </select>
+      
+        <input type="hidden" name="date" value="<?php echo date("Y-m-d H:i:s"); ?>">
+        <input type="number" name="hour" value="<?php echo isset($_POST['hour']) ? $_POST['hour'] : "0"; ?>" min="0" max="23" required="required">h
+        <input type="number" name="minute" value="<?php echo isset($_POST['minute']) ? $_POST['minute'] : "0"; ?>" min="0" max="59" required="required">m
+        <br>
+        <!-- エラーメッセージ表示 -->
+        <div class="error_message"><?php echo $error_message; ?></div>
+        <input type="submit" value="決定">
+    </form>
+</div>
 
 <script src="../js/index.js"></script>
 </body>
