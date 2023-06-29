@@ -53,14 +53,15 @@ if (!empty($_POST['tag_name']) && !empty($_POST['hour']) && !empty($_POST['minut
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TEST</title>
+    <link rel="stylesheet" href="../css/common.css">
 </head>
 <body>
 
 <div class="tab">
     <ul class="tab_menu">
         <li class="Index"><a href="index.php">入力</a></li>
-        <li class="Graph"><a href="graph.php">グラフ</a></li>
-        <li class="Week"><a href="week.php">週</a></li>
+        <li class="Graph"><a href="graph_week.php">グラフ（週）</a></li>
+        <li class="Week"><a href="graph_month.php">グラフ（月）</a></li>
         <li class="Month"><a href="month.php">月</a></li>
     </ul>
 </div>
