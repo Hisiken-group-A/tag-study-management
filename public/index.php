@@ -32,7 +32,7 @@ if (!empty($_POST['tag_name']) && !empty($_POST['hour']) && !empty($_POST['minut
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
-} 
+}
 
 ?>
 <!DOCTYPE html>

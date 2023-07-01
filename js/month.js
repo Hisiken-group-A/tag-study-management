@@ -51,6 +51,8 @@ function createCalendar() {
   document.querySelector('#calendar').innerHTML = createHtml;
 }
 createCalendar();
+getTotalStudyTime();
+getEachDayStudyTime();
 
 //back,next
 function NewCalendar() {
@@ -69,12 +71,43 @@ function back() {
       month = 12; //12に戻る
   }
   NewCalendar();
+  getTotalStudyTime();
+  getEachDayStudyTime();
 }
 function next() {
-  month++;
-  if (month > 12) {
-      year++;
-      month = 1;
-  }
-  NewCalendar();
+
+    month++;
+    if (month > 12) {
+        year++;
+        month = 1;
+    }
+    NewCalendar();
+    getTotalStudyTime();
+    getEachDayStudyTime();
+}
+
+function getTotalStudyTime() {
+    let xhr = new XMLHttpRequest();
+    //openの第三引数は非同期(true)で行うと言う指定
+    xhr.open("GET",`../public/change-month.php?type=month&year=${year}&month=${month}`,true); 
+    xhr.responseType = "text"; //結果をテキスト形式で取得
+    xhr.addEventListener('load', function(event){
+        console.log(xhr.response); //->本来のメインの出力
+        // console.log(event.target.response); //->イベントにも入る
+    });
+    xhr.send(null);
+}
+
+function getEachDayStudyTime() {
+    let xhr = new XMLHttpRequest();
+    //openの第三引数は非同期(true)で行うと言う指定
+    xhr.open("GET",`../public/change-month.php?type=each_day&year=${year}&month=${month}`,true); 
+    xhr.responseType = "text"; //結果をテキスト形式で取得
+    xhr.addEventListener('load', function(event){
+        // console.log(xhr.response); //->本来のメインの出力
+        // console.log(event.target.response); //->イベントにも入る
+        var param = JSON.parse(xhr.response); //JSONデコード
+        console.log(param);
+    });
+    xhr.send(null);
 }
