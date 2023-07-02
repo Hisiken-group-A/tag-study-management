@@ -36,9 +36,9 @@ function createCalendar() {
     createHtml += '<tr>';
     for (let d = 0; d < 7; d++) {
       if (n == 0 && d < firstDay) {
-        createHtml += '<td class="disabled"><button class="button_click"><a href="../public/edit.php"></td></a>';
+        createHtml += '<td></td>';
       } else if (dayCount > lastDayCount) {
-        createHtml += '<td class="disabled"><button class="button_click"><a href="../public/edit.php"></td></a>';
+        createHtml += '<td></td>';
       } else {
         createHtml += '<td class="disabled"><button class="button_click"><a href="../public/edit.php">' + dayCount + '</td></a>';
         dayCount++;
@@ -54,27 +54,32 @@ createCalendar();
 
 //back,next
 function NewCalendar() {
-    firstDate = new Date(year, month - 1, 1);
-    firstDay = firstDate.getDay();
-    lastDate = new Date(year, month, 0);
-    lastDayCount = lastDate.getDate();
-    dayCount = 1;
-    createCalendar();
+  firstDate = new Date(year, month - 1, 1);
+  firstDay = firstDate.getDay();
+  lastDate = new Date(year, month, 0);
+  lastDayCount = lastDate.getDate();
+  dayCount = 1;
+  createCalendar();
 }
 
 function back() {
-  month--; //1ヶ月ずつマイナス
-  if (month < 1) { //1未満になったら
-      year--; //年を1ずつ減らす
-      month = 12; //12に戻る
-  }
-  NewCalendar();
+month--; //1ヶ月ずつマイナス
+month_Eng =  month_English[month - 1];
+
+if (month < 1) { //1未満になったら
+    year--; //年を1ずつ減らす
+    month = 12; //12に戻る
+    month_Eng =  month_English[11];
+}
+NewCalendar();
 }
 function next() {
-  month++;
-  if (month > 12) {
-      year++;
-      month = 1;
-  }
-  NewCalendar();
+month++;
+month_Eng =  month_English[month + 1];
+if (month > 12) {
+    year++;
+    month = 1;
+    month_Eng = month_English[0];
+}
+NewCalendar();
 }
