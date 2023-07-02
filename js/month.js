@@ -1,5 +1,7 @@
 'use strict';
 
+const total = document.getElementById('total');
+
 let date = new Date(); //現在の日時
 let year = date.getFullYear(); //年のデータ
 let month = date.getMonth() + 1; //月のデータ
@@ -51,8 +53,14 @@ function createCalendar() {
   document.querySelector('#calendar').innerHTML = createHtml;
 }
 createCalendar();
-getTotalStudyTime();
-getEachDayStudyTime();
+getTotalStudyTime(function(response) {
+    console.log(response);
+    total.textContent = response;
+  });
+  
+getEachDayStudyTime(function(response) {
+    console.log(response);
+  });
 
 //back,next
 function NewCalendar() {
@@ -71,8 +79,16 @@ function back() {
       month = 12; //12に戻る
   }
   NewCalendar();
-  getTotalStudyTime();
-  getEachDayStudyTime();
+  getTotalStudyTime(function(response) {
+    console.log(response);
+    total.textContent = response;
+  });
+  
+getEachDayStudyTime(function(response) {
+    console.log(response);
+    // 応答データを適切に処理する
+    // ...
+  });
 }
 function next() {
 
@@ -82,23 +98,30 @@ function next() {
         month = 1;
     }
     NewCalendar();
-    getTotalStudyTime();
-    getEachDayStudyTime();
+    getTotalStudyTime(function(response) {
+        console.log(response);
+        total.textContent = response;
+      });
+      
+    getEachDayStudyTime(function(response) {
+        console.log(response);
+        // 応答データを適切に処理する
+        // ...
+      });
 }
 
-function getTotalStudyTime() {
+function getTotalStudyTime(callback) {
     let xhr = new XMLHttpRequest();
     //openの第三引数は非同期(true)で行うと言う指定
     xhr.open("GET",`../public/change-month.php?type=month&year=${year}&month=${month}`,true); 
     xhr.responseType = "text"; //結果をテキスト形式で取得
     xhr.addEventListener('load', function(event){
-        console.log(xhr.response); //->本来のメインの出力
-        // console.log(event.target.response); //->イベントにも入る
+        callback(xhr.response); 
     });
     xhr.send(null);
 }
 
-function getEachDayStudyTime() {
+function getEachDayStudyTime(callback) {
     let xhr = new XMLHttpRequest();
     //openの第三引数は非同期(true)で行うと言う指定
     xhr.open("GET",`../public/change-month.php?type=each_day&year=${year}&month=${month}`,true); 
@@ -106,8 +129,8 @@ function getEachDayStudyTime() {
     xhr.addEventListener('load', function(event){
         // console.log(xhr.response); //->本来のメインの出力
         // console.log(event.target.response); //->イベントにも入る
-        var param = JSON.parse(xhr.response); //JSONデコード
-        console.log(param);
+        var param = JSON.parse(xhr.responseText); //JSONデコード
+        callback(param);
     });
     xhr.send(null);
 }

@@ -1,25 +1,3 @@
-<?php
-
-require_once '../config/dbconnect.php'; 
-require_once '../class/Tag.php';
-
-$pdo = connect();
-
-$stmt = $pdo->query("SELECT * FROM study_time WHERE date BETWEEN '2023-06-01' AND '2023-06-31'");
-$studies = $stmt->fetchAll();
-
-$total = 0;
-
-foreach ($studies as $study_time) {
-    $total += (int)$study_time["study_time"];
-}
-
-$hour = floor($total / 60);
-$minuits = $total % 60;
-
-echo $hour . "h" . $minuits . "m";
-
-?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -41,6 +19,7 @@ echo $hour . "h" . $minuits . "m";
     <button id="next" onclick="next()">></button>
 </div>
 <div id="calendar"></div>
+<div id="total"></div>
 <script src="../js/month.js"></script>
 </body>
 </html>
