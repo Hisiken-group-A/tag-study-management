@@ -25,7 +25,7 @@ for (let i = 0; i < weeks.length; i++) {
 }
 createHtml += '</tr>';
 
-function createCalendar() {
+function createCalendar(studyTimeJson) {
   createHtml = '<h1>' + year + '/' + month + month_Eng + '</h1>';
   createHtml += '<table>' + '<tr>';
 
@@ -37,67 +37,80 @@ function createCalendar() {
   for (let n = 0; n < 6; n++) {
     createHtml += '<tr>';
     for (let d = 0; d < 7; d++) {
-      if (n == 0 && d < firstDay) {
-        createHtml += '<td></td>';
-      } else if (dayCount > lastDayCount) {
-        createHtml += '<td></td>';
-      } else {
-        createHtml += '<td>' + dayCount + '</td>';
-        dayCount++;
-      }
+        if (n == 0 && d < firstDay) {
+            createHtml += '<td></td>';
+        } else if (dayCount > lastDayCount) {
+            createHtml += '<td></td>';
+        } else {
+            //勉強時間表示
+            createHtml += '<td>' + dayCount;
+            let calendarDate = year + '-' + month + '-' + dayCount;
+            console.log(calendarDate);
+            for(let i = 0; i < studyTimeJson.length; i++){
+                let date = new Date(studyTimeJson[i].date);
+                let year = date.getFullYear();
+                let month = date.getMonth() + 1;
+                let day = date.getDate();
+                let formattedDate = year + '-' + month + '-' + day;
+                if(calendarDate==formattedDate){
+                    const hour = Math.floor(studyTimeJson[i].study_time / 60);
+                    const minuits = studyTimeJson[i].study_time % 60;
+                    createHtml += '<br>'+ hour + 'h' + minuits + 'm';
+                }
+            }
+            createHtml += '</td>';
+            dayCount++;
+        }
     }
     createHtml += '</tr>';
-  }
-  createHtml += '</table>';
+    }
+    createHtml += '</table>';
 
-  document.querySelector('#calendar').innerHTML = createHtml;
+    document.querySelector('#calendar').innerHTML = createHtml;
 }
-createCalendar();
 getTotalStudyTime(function(response) {
     console.log(response);
     total.textContent = response;
-  });
-  
+});
+
 getEachDayStudyTime(function(response) {
     console.log(response);
-  });
+    createCalendar(response);
+});
 
 //back,next
-function NewCalendar() {
+function NewCalendar(studyTimeJson) {
     firstDate = new Date(year, month - 1, 1);
     firstDay = firstDate.getDay();
     lastDate = new Date(year, month, 0);
     lastDayCount = lastDate.getDate();
     dayCount = 1;
-    createCalendar();
+    createCalendar(studyTimeJson);
 }
 
 function back() {
-  month--; //1ヶ月ずつマイナス
-  if (month < 1) { //1未満になったら
-      year--; //年を1ずつ減らす
-      month = 12; //12に戻る
-  }
-  NewCalendar();
+    month--; //1ヶ月ずつマイナス
+    if (month < 1) { //1未満になったら
+        year--; //年を1ずつ減らす
+        month = 12; //12に戻る
+    }
   getTotalStudyTime(function(response) {
-    console.log(response);
-    total.textContent = response;
-  });
-  
-getEachDayStudyTime(function(response) {
-    console.log(response);
-    // 応答データを適切に処理する
-    // ...
+      console.log(response);
+      total.textContent = response;
+    });
+    
+    getEachDayStudyTime(function(response) {
+        console.log(response);
+        NewCalendar(response);
   });
 }
-function next() {
 
+function next() {
     month++;
     if (month > 12) {
         year++;
         month = 1;
     }
-    NewCalendar();
     getTotalStudyTime(function(response) {
         console.log(response);
         total.textContent = response;
@@ -105,6 +118,7 @@ function next() {
       
     getEachDayStudyTime(function(response) {
         console.log(response);
+        NewCalendar(response);
         // 応答データを適切に処理する
         // ...
       });

@@ -21,8 +21,6 @@ function get_total_study_time(){
     $date_start = $_GET['year']."-".sprintf('%02d', $_GET['month'])."-01";
     $objDateTime = new DateTime($_GET['year']."-".sprintf('%02d', $_GET['month']).' +1 month');//来月
     $date_end = $objDateTime->format('Y-m-d');
-    // echo $date_start;
-    // echo $date_end;
     $stmt = $pdo->query("SELECT * FROM study_time WHERE date BETWEEN '$date_start' AND '$date_end'");
     $studies = $stmt->fetchAll();
     $total = 0;
@@ -45,8 +43,6 @@ function get_each_day_study_time(){
 
     $stmt = $pdo->query("SELECT * FROM study_time WHERE date BETWEEN '$date_start' AND '$date_end'");
     $studies = $stmt->fetchAll();
-
-    // $hour = floor($total / 60);
 
     $json_studies = json_encode($studies);
     echo $json_studies;

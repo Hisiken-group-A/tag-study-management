@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TAG-STUDY-MANAGEMENT</title>
+    <link rel="stylesheet" href="../css/month.css">
 </head>
 <body>
 <div class="tab">
