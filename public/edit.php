@@ -4,19 +4,6 @@ require_once '../config/dbconnect.php';
 
 $pdo = connect();
 
-//タグ追加フォームを打ち込んだとき
-if (!empty($_POST['add_tag_button'])) {
-    try {
-        $stmt = $pdo->prepare("INSERT INTO tag (tag_name) VALUES (:title)");
-        $stmt->bindValue('title', $_POST['tag_name'], \PDO::PARAM_STR);//(文字列として)
-        $stmt->execute();
-
-        header('Location: index.php');
-    } catch (PDOException $e) {
-        echo $e->getMessage();
-    }
-}
-
 $stmt = $pdo->query("SELECT * FROM tag");
 $tags = $stmt->fetchAll();
 
