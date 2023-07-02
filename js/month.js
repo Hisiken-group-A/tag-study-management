@@ -66,7 +66,7 @@ function createCalendar(studyTimeJson) {
                 if(calendarDate==formattedDate){
                     const hour = Math.floor(studyTimeJson[i].study_time / 60);
                     const minuits = studyTimeJson[i].study_time % 60;
-                    createHtml += '<br>'+ hour + 'h' + minuits + 'm';
+                    createHtml += '<br>'+ '<a href="edit.php?id='+ studyTimeJson[i].id +'">' + hour + 'h' + minuits + 'm' + '</a>';
                 }
             }
             createHtml += '</td>';
