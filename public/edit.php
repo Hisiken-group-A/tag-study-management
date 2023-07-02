@@ -23,28 +23,36 @@ $tags = $stmt->fetchAll();
 //日本の東京時間に設定
 date_default_timezone_set("Asia/Tokyo");
 
-//勉強時間入力フォームを打ち込んだとき
-if (!empty($_POST['tag_name']) && !empty($_POST['hour']) && !empty($_POST['minute'])) {
-    try {
-        $tag_id = $_POST['tag_name'];
-        $date = $_POST['date'];
-        
-        //○時間○分を○分間に変換
-        $minute_time = (int)$_POST['hour'] * 60 + (int)$_POST['minute'];
-        $minute_time = (string)$minute_time;
+//エラー変数
+$error_message = "";
 
-        $sql = "INSERT INTO study_time (study_time, date, tag_id) VALUES (:study_time, :date, :tag_id)";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindValue(':study_time', $minute_time, PDO::PARAM_STR); //文字列として
-        $stmt->bindValue(':date', $date, PDO::PARAM_STR);
-        $stmt->bindValue(':tag_id', $tag_id, PDO::PARAM_STR); 
-        $stmt->execute();
-
-        header('Location: index.php');
-    } catch (PDOException $e) {
-        echo $e->getMessage();
+//勉強時間変更
+if (!empty($_POST['tag_name'])) {
+    if ($_POST['hour'] == 0 && $_POST['minute'] == 0) {
+        //エラーメッセージ
+        $error_message = "0h0mは入力できません";
+    } else {
+        try {
+            $tag_id = $_POST['tag_name'];
+            // $date = $_POST['date'];
+            
+            //○時間○分を○分間に変換
+            $minute_time = (int)$_POST['hour'] * 60 + (int)$_POST['minute'];
+            $minute_time = (string)$minute_time;
+    
+            $sql = "UPDATE study_time SET study_time = :study_time, tag_id = :tag_id WHERE id = :id";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':study_time', $minute_time, PDO::PARAM_STR); //文字列として
+            $stmt->bindValue(':tag_id', $tag_id, PDO::PARAM_STR); 
+            $stmt->bindValue(':id', 14);
+            $stmt->execute();
+    
+            header('Location: edit.php');
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
     }
-} 
+}
 
 ?>
 <!DOCTYPE html>
@@ -66,7 +74,7 @@ if (!empty($_POST['tag_name']) && !empty($_POST['hour']) && !empty($_POST['minut
 </div>
 <h3>編集</h3>
 <!-- 勉強時間入力フォーム -->
-<form action="#" method="post" name="a">
+<form action="edit.php" method="post" name="a">
     勉強時間入力
     <br>
     <select name="tag_name">
@@ -76,11 +84,16 @@ if (!empty($_POST['tag_name']) && !empty($_POST['hour']) && !empty($_POST['minut
         <?php endforeach; ?>
     </select>
     <input type="hidden" name="date" value="<?php echo date("Y-m-d H:i:s"); ?>">
-    <input type="number" name="hour" value="0" min="0" max="23"required>h
-    <input type="number" name="minute" value="0" min="0" max="59" required>m
-    <br>
-    <button type="button" onclick="window.history.back();" >戻る</button>
-    <input type="submit" value="決定">
+        <input type="number" name="hour" value="<?php echo isset($_POST['hour']) ? $_POST['hour'] : "0"; ?>" min="0" max="23" required="required">h
+        <input type="number" name="minute" value="<?php echo isset($_POST['minute']) ? $_POST['minute'] : "0"; ?>" min="0" max="59" required="required">m
+        <br>
+        <!-- エラーメッセージ表示 -->
+        <div class="error_message">
+            <?php if (mb_strlen($error_message) > 0) : ?>
+                <p>0h0mは入力できません</p>
+            <?php endif; ?>
+        </div>
+        <input type="submit" value="決定">
 </form>
 
 </body>
