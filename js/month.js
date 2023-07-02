@@ -21,10 +21,21 @@ createHtml += '<table>' + '<tr>';
 
 const weeks = ['日', '月', '火', '水', '木', '金', '土'];
 for (let i = 0; i < weeks.length; i++) {
-  createHtml += '<td>' + weeks[i] + '</td>';
+    createHtml += '<td>' + weeks[i] + '</td>';
 }
 createHtml += '</tr>';
 
+getTotalStudyTime(function(response) {
+    console.log(response);
+    total.textContent = response;
+});
+
+getEachDayStudyTime(function(response) {
+    console.log(response);
+    createCalendar(response);
+});
+
+//カレンダー作成
 function createCalendar(studyTimeJson) {
   createHtml = '<h1>' + year + '/' + month + month_Eng + '</h1>';
   createHtml += '<table>' + '<tr>';
@@ -65,18 +76,8 @@ function createCalendar(studyTimeJson) {
     createHtml += '</tr>';
     }
     createHtml += '</table>';
-
     document.querySelector('#calendar').innerHTML = createHtml;
 }
-getTotalStudyTime(function(response) {
-    console.log(response);
-    total.textContent = response;
-});
-
-getEachDayStudyTime(function(response) {
-    console.log(response);
-    createCalendar(response);
-});
 
 //back,next
 function NewCalendar(studyTimeJson) {
@@ -88,23 +89,24 @@ function NewCalendar(studyTimeJson) {
     createCalendar(studyTimeJson);
 }
 
+//前の月を表示
 function back() {
     month--; //1ヶ月ずつマイナス
     if (month < 1) { //1未満になったら
         year--; //年を1ずつ減らす
         month = 12; //12に戻る
     }
-  getTotalStudyTime(function(response) {
+    getTotalStudyTime(function(response) {
       console.log(response);
       total.textContent = response;
     });
-    
     getEachDayStudyTime(function(response) {
         console.log(response);
         NewCalendar(response);
-  });
+    });
 }
 
+//次の月を表示
 function next() {
     month++;
     if (month > 12) {
@@ -114,16 +116,14 @@ function next() {
     getTotalStudyTime(function(response) {
         console.log(response);
         total.textContent = response;
-      });
-      
+    });
     getEachDayStudyTime(function(response) {
         console.log(response);
         NewCalendar(response);
-        // 応答データを適切に処理する
-        // ...
-      });
+    });
 }
 
+//月の合計時間を取得し，合計時間をコールバック関数として返す
 function getTotalStudyTime(callback) {
     let xhr = new XMLHttpRequest();
     //openの第三引数は非同期(true)で行うと言う指定
@@ -135,14 +135,13 @@ function getTotalStudyTime(callback) {
     xhr.send(null);
 }
 
+//選択された月の日にちごとの勉強時間を取得し，コールバック関数として返す
 function getEachDayStudyTime(callback) {
     let xhr = new XMLHttpRequest();
     //openの第三引数は非同期(true)で行うと言う指定
     xhr.open("GET",`../public/change-month.php?type=each_day&year=${year}&month=${month}`,true); 
     xhr.responseType = "text"; //結果をテキスト形式で取得
     xhr.addEventListener('load', function(event){
-        // console.log(xhr.response); //->本来のメインの出力
-        // console.log(event.target.response); //->イベントにも入る
         var param = JSON.parse(xhr.responseText); //JSONデコード
         callback(param);
     });
