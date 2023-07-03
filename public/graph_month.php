@@ -25,6 +25,6 @@
 
 <canvas id="graph" class="graph_class"></canvas>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="../js/graph_week.js"></script>
+<script src="../js/graph_month.js"></script>
 </body>
 </html>
