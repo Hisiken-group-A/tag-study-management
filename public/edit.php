@@ -64,22 +64,16 @@ if (!empty($_POST['tag_name'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TEST</title>
+    <title>編集ページ</title>
+    <!-- <link rel="stylesheet" href="../css/common.css"> -->
 </head>
 <body>
+<?php include('../inc/tab.php'); ?>
 
-<div class="tab">
-    <ul class="tab_menu">
-        <li class="Index"><a href="index.php">入力</a></li>
-        <li class="Graph"><a href="graph.php">グラフ</a></li>
-        <li class="Week"><a href="week.php">週</a></li>
-        <li class="Month"><a href="month.php">月</a></li>
-    </ul>
-</div>
-<h3>編集</h3>
-<!-- 勉強時間変更フォーム -->
-<form method="post" name="edit_form">
-    変更時間入力
+<h1>編集</h1>
+<!-- 勉強時間入力フォーム -->
+<form action="#" method="post" name="a">
+    勉強時間入力
     <br>
     <select name="tag_name">
         <option value=""><?php echo $study_tag_name['tag_name']; ?></option>
