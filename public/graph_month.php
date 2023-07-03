@@ -10,18 +10,21 @@
 <div class="tab">
             <ul class="tab_menu">
                 <li class="Index"><a href="index.php">入力</a></li>
-                <li class="Graph"><a href="graph_week.php">グラフ（週）</a></li>
-                <li class="Week"><a href="graph_month.php">グラフ（月）</a></li>
+                <li class="Graph"><a href="graph_week.php">週グラフ</a></li>
+                <li class="Week"><a href="graph_month.php">月グラフ</a></li>
                 <li class="Month"><a href="month.php">月</a></li>
             </ul>
 </div>
 
 <div id="next_back_button">
-    <button id="back" onclick="back()"><</button>
-    <button id="next" onclick="next()">></button>
+    <button id="back_graph_month" onclick="back_graph_month()"><</button>
+    <button id="next_graph_month" onclick="next_graph_month()">></button>
 </div>
-<canvas id="graph" class="graph_class" width="100" height="50"></canvas>
+
+<div id="MonthCount">
+</div>
+<canvas id="graph" class="graph_class"></canvas>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="../js/graph_week.js"></script>
+<script src="../js/graph_month.js"></script>
 </body>
 </html>

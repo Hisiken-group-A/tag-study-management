@@ -65,8 +65,8 @@ if (!empty($_POST['tag_name'])) {
 <div class="tab">
     <ul class="tab_menu">
         <li class="Index"><a href="index.php">入力</a></li>
-        <li class="Graph_week"><a href="graph.php">週グラフ</a></li>
-        <li class="Graph_month"><a href="week.php">月グラフ</a></li>
+        <li class="Graph_week"><a href="graph_week.php">週グラフ</a></li>
+        <li class="Graph_month"><a href="graph_month.php">月グラフ</a></li>
         <li class="Month"><a href="month.php">月</a></li>
     </ul>
 </div>
