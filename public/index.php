@@ -62,14 +62,7 @@ if (!empty($_POST['tag_name'])) {
 </head>
 <body>
 
-<div class="tab">
-    <ul class="tab_menu">
-        <li class="Index"><a href="index.php">入力</a></li>
-        <li class="Graph_week"><a href="graph_week.php">週グラフ</a></li>
-        <li class="Graph_month"><a href="graph_month.php">月グラフ</a></li>
-        <li class="Month"><a href="month.php">月</a></li>
-    </ul>
-</div>
+<?php include('../inc/tab.php'); ?>
 
 <div class="box">
     <div class="top"></div>
@@ -92,7 +85,7 @@ if (!empty($_POST['tag_name'])) {
         <h3>タグの削除/変更</h3>
         <!-- タグ削除フォーム-->
         <div class ="tag_ya">
-        <select id="intext" name="tag_id">
+        <select id="intext" class="tag_edit_select" name="tag_id">
             タグを選択
             <option value="" >タグを選択</option>
             <?php  foreach($tags as $tag): ?>
