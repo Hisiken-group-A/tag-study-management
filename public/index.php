@@ -84,7 +84,7 @@ if (!empty($_POST['tag_name'])) {
         <h3>タグの削除/変更</h3>
         <!-- タグ削除フォーム-->
         <div class ="tag_ya">
-        <select id="intext" name="tag_id">
+        <select id="intext" class="tag_edit_select" name="tag_id">
             タグを選択
             <option value="" >タグを選択</option>
             <?php  foreach($tags as $tag): ?>
