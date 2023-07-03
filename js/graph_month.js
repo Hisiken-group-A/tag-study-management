@@ -8,9 +8,30 @@ let firstDay = firstDate.getDay(); //曜日のデータ
 let lastDate = new Date(year, month, 0); //今月の最終日
 let lastDayCount = lastDate.getDate();
 
-window.onload = function () {
+NewGraphCount();
+getEachDayStudyTime(function(eachDayStudyTime) {
+    getAllTag(function(tags) {
+        const eachTagStudyTime = [];
+        const eachTagName = [];
+        for(let i = 0; i < tags.length; i++){
+            eachTagStudyTime[i] = 0;
+        }
+        for(let i = 0; i < eachDayStudyTime.length; i++){
+            for(let j = 0; j < tags.length; j++){
+                if(eachDayStudyTime[i].tag_id == tags[j].id){
+                    eachTagStudyTime[j] += Number(eachDayStudyTime[i].study_time);
+                    console.log(eachTagStudyTime[j]);
+                    continue;
+                }
+            }
+        }
+        for(let i = 0; i < tags.length; i++){
+            // console.log(eachTagStudyTime[i]);
+        }
+    });
     NewGraph();
-};
+});
+
 function NewGraph () {
     let context = document.querySelector("#graph").getContext('2d')
     new Chart(context, {
@@ -23,24 +44,43 @@ function NewGraph () {
         }
     });
 }
-NewGraph();
 
 function NewGraphCount() {
-let MonthCountHtml = '';
+    let MonthCountHtml = '';
 
-MonthCountHtml = '<h1>' + year + '/' + month + '</h1>';
+    MonthCountHtml = '<h1>' + year + '/' + month + '</h1>';
 
-document.querySelector('#MonthCount').innerHTML = MonthCountHtml;
+    document.querySelector('#MonthCount').innerHTML = MonthCountHtml;
 }
 
 function back_graph_month() {
     month--; //1ヶ月ずつマイナス
-
     if (month < 1) { //1未満になったら
         year--; //年を1ずつ減らす
         month = 12; //12に戻る
     }
+
     NewGraphCount();
+    getEachDayStudyTime(function(eachDayStudyTime) {
+        getAllTag(function(tags) {
+            const eachTagStudyTime = [];
+            for(let i = 0; i < tags.length; i++){
+                eachTagStudyTime[i] = 0;
+            }
+            for(let i = 0; i < eachDayStudyTime.length; i++){
+                for(let j = 0; j < tags.length; j++){
+                    if(eachDayStudyTime[i].tag_id == tags[j].id){
+                        eachTagStudyTime[j] += Number(eachDayStudyTime[i].study_time);
+                        console.log(eachTagStudyTime[j]);
+                        continue;
+                    }
+                }
+            }
+            for(let i = 0; i < tags.length; i++){
+                // console.log(eachTagStudyTime[i]);
+            }
+        });
+    });
 }
 
 function next_graph_month() {
@@ -50,4 +90,48 @@ function next_graph_month() {
         month = 1;
     }
     NewGraphCount();
+    getEachDayStudyTime(function(eachDayStudyTime) {
+        getAllTag(function(tags) {
+            const eachTagStudyTime = [];
+            for(let i = 0; i < tags.length; i++){
+                eachTagStudyTime[i] = 0;
+            }
+            for(let i = 0; i < eachDayStudyTime.length; i++){
+                for(let j = 0; j < tags.length; j++){
+                    if(eachDayStudyTime[i].tag_id == tags[j].id){
+                        eachTagStudyTime[j] += Number(eachDayStudyTime[i].study_time);
+                        console.log(eachTagStudyTime[j]);
+                        continue;
+                    }
+                }
+            }
+            for(let i = 0; i < tags.length; i++){
+                // console.log(eachTagStudyTime[i]);
+            }
+        });
+    });
+}
+
+function getAllTag(callback) {
+    let xhr = new XMLHttpRequest();
+    //openの第三引数は非同期(true)で行うと言う指定
+    xhr.open("GET",`../public/change-month.php?type=month_tag`,true); 
+    xhr.responseType = "text"; //結果をテキスト形式で取得
+    xhr.addEventListener('load', function(event){
+        var param = JSON.parse(xhr.responseText); //JSONデコード
+        callback(param);
+    });
+    xhr.send(null);
+}
+
+function getEachDayStudyTime(callback) {
+    let xhr = new XMLHttpRequest();
+    //openの第三引数は非同期(true)で行うと言う指定
+    xhr.open("GET",`../public/change-month.php?type=each_day&year=${year}&month=${month}`,true); 
+    xhr.responseType = "text"; //結果をテキスト形式で取得
+    xhr.addEventListener('load', function(event){
+        var param = JSON.parse(xhr.responseText); //JSONデコード
+        callback(param);
+    });
+    xhr.send(null);
 }

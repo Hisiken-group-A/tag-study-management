@@ -14,7 +14,7 @@
     <button id="next_graph_month" onclick="next_graph_month()">></button>
 </div>
 
-<div id="MonthCount">
+<div id="MonthCount"></div>
 
 <canvas id="graph" class="graph_class"></canvas>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

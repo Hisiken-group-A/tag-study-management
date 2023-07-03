@@ -12,6 +12,9 @@ switch ($type){
     case 'each_day':
         get_each_day_study_time();
         break;
+    case 'month_tag':
+        get_month_all_tag();
+        break;
     default:
         break;
 }
@@ -45,5 +48,13 @@ function get_each_day_study_time(){
     $studies = $stmt->fetchAll();
 
     $json_studies = json_encode($studies);
+    echo $json_studies;
+}
+
+function get_month_all_tag(){
+    $pdo = connect();
+    $stmt = $pdo->query("SELECT * FROM tag");
+    $tags = $stmt->fetchAll();
+    $json_studies = json_encode($tags);
     echo $json_studies;
 }
