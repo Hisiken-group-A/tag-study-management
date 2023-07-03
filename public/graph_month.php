@@ -7,7 +7,9 @@
     <!-- <link rel="stylesheet" href="../css/common.css"> -->
 </head>
 <body>
+
 <?php include('../inc/tab.php'); ?>
+
 
 <div id="next_back_button">
     <button id="back_graph_month" onclick="back_graph_month()"><</button>
@@ -15,6 +17,7 @@
 </div>
 
 <div id="MonthCount">
+</div>
 
 <canvas id="graph" class="graph_class"></canvas>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

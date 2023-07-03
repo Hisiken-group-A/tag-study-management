@@ -61,6 +61,7 @@ if (!empty($_POST['tag_name'])) {
     <link href="https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Beginner&family=M+PLUS+1&family=Zen+Maru+Gothic&display=swap" rel="stylesheet">
 </head>
 <body>
+
 <?php include('../inc/tab.php'); ?>
 
 <div class="box">

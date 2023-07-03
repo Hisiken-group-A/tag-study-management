@@ -10,6 +10,7 @@ let lastDayCount = lastDate.getDate();
 
 window.onload = function () {
     NewGraph();
+    NewGraphCount();
 };
 function NewGraph () {
     let context = document.querySelector("#graph").getContext('2d')
@@ -23,7 +24,6 @@ function NewGraph () {
         }
     });
 }
-NewGraph();
 
 function NewGraphCount() {
 let MonthCountHtml = '';

@@ -12,8 +12,10 @@
 <div id="next_back_button">
     <button id="back" onclick="back()"><</button>
     <button id="next" onclick="next()">></button>
+    <span id="Sunday"></span>ー<span id="Saturday"></span>
 </div>
-<canvas id="graph" class="graph_class" width="100" height="50"></canvas>
+<canvas id="graph_bar" class="graph_class_bar"></canvas>
+<canvas id="graph_pie" class="graph_class_pie"></canvas>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="../js/graph_week.js"></script>
 </body>
