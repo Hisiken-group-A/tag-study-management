@@ -9,7 +9,7 @@
 </head>
 <body>
 <?php include('../inc/tab.php'); ?>
-
+  
 <div id="next_back_button">
     <button id="back" onclick="back()"><</button>
     <button id="next" onclick="next()">></button>
