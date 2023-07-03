@@ -31,7 +31,7 @@ date_default_timezone_set("Asia/Tokyo");
 $error_message = "";
 
 //勉強時間変更
-if (!empty($_POST['tag_name'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($_POST['hour'] == 0 && $_POST['minute'] == 0) {
         //エラーメッセージ
         $error_message = "0h0mは入力できません";
@@ -72,7 +72,7 @@ if (!empty($_POST['tag_name'])) {
 
 <h1>編集</h1>
 <!-- 勉強時間入力フォーム -->
-<form action="#" method="post" name="a">
+<form  method="post" name="a">
     勉強時間入力
     <br>
     <select name="tag_name">
@@ -88,11 +88,7 @@ if (!empty($_POST['tag_name'])) {
     <input type="number" name="minute" value="<?php echo $study_mimute ?>" min="0" max="59" required="required">m
     <br>
     <!-- エラーメッセージ表示 -->
-    <div class="error_message">
-        <?php if (mb_strlen($error_message) > 0) : ?>
-            <p>0h0mは入力できません</p>
-        <?php endif; ?>
-    </div>
+    <div class="error_message"><?php echo $error_message; ?></div>
     <input type="submit" value="決定">
 </form>
 
