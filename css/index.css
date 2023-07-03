@@ -161,7 +161,7 @@ select:focus {
 
 .tag_ya::after{
   position: absolute;
-  top: 385.5px; /* 矢印の位置 */
+  top: 408.5px; /* 矢印の位置 */
   right: 755px; /* 矢印の位置 */
   width: 10px; /* 矢印の大きさ */
   height: 10px; /* 矢印の大きさ */
@@ -175,7 +175,7 @@ select:focus {
 
 .time_ya::after{
   position: absolute;
-  top: 568px; /* 矢印の位置 */
+  top: 613px; /* 矢印の位置 */
   right: 755px; /* 矢印の位置 */
   width: 10px; /* 矢印の大きさ */
   height: 10px; /* 矢印の大きさ */
