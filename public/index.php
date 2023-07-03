@@ -51,11 +51,7 @@ if (!empty($_POST['tag_name'])) {
     <title>TAG-STUDY-MANAGEMENT</title>
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/index.css">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Beginner&family=Zen+Maru+Gothic&display=swap" rel="stylesheet">
-
+    
     <link rel="preconnect" href="https://fonts.googleapis.com"> 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
     <link href="https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Beginner&family=M+PLUS+1&family=Zen+Maru+Gothic&display=swap" rel="stylesheet">
@@ -79,6 +75,7 @@ if (!empty($_POST['tag_name'])) {
         <input type="submit" id="btn" value="追加">
     </form>
 
+    <br>
     <br>
     <!-- タグ編集・削除フォーム -->
     <form action="?action=change_or_delete" method="post">
@@ -112,6 +109,7 @@ if (!empty($_POST['tag_name'])) {
         </div>
     </form>
   
+    <br>
     <br>
     <br>
     <br>

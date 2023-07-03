@@ -6,3 +6,10 @@
         <li class="Month"><a href="month.php">月</a></li>
     </ul>
 </div>
+
+<div class="box">
+    <div class="top"></div>
+    <div class="bottom"></div>
+    <div class="left"></div>
+    <div class="right"></div>
+</div>

@@ -65,11 +65,18 @@ if (!empty($_POST['tag_name'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>編集ページ</title>
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/edit.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Beginner&family=M+PLUS+1&family=Zen+Maru+Gothic&display=swap" rel="stylesheet">
     <!-- <link rel="stylesheet" href="../css/common.css"> -->
 </head>
 <body>
 <?php include('../inc/tab.php'); ?>
 
+<div class="main">
 <h1>編集</h1>
 <!-- 勉強時間入力フォーム -->
 <form action="#" method="post" name="a">
@@ -95,6 +102,7 @@ if (!empty($_POST['tag_name'])) {
     </div>
     <input type="submit" value="決定">
 </form>
+</div>
 
 </body>
 </html>

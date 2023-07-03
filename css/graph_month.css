@@ -1,0 +1,35 @@
+.Index{
+    z-index: 2;   
+}
+
+.Graph_week{
+    z-index: 3;
+}
+
+.Graph_month{
+    z-index: 4;            
+}
+
+.Month{
+    z-index: 1;      
+}
+
+.top{
+    background-color: #88BFCA;
+}
+
+.bottom{
+    background-color: #88BFCA;
+}
+
+.left{
+    background-color: #88BFCA;
+}
+
+.right{
+    background-color: #88BFCA;
+}
+
+.main{
+    margin:10% 30% 0% 30%;
+}
