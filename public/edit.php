@@ -7,6 +7,23 @@ $pdo = connect();
 $stmt = $pdo->query("SELECT * FROM tag");
 $tags = $stmt->fetchAll();
 
+//変更部分の勉強時間を抽出し◯h◯mに変換
+$study_id = $_GET['id'];
+$study_hour = "";
+$study_mimute = "";
+$stmt = $pdo->query("SELECT study_time,tag_id FROM study_time WHERE id = $study_id");
+$study_datas = $stmt->fetchAll();
+foreach ($study_datas as $study_data) {
+    $study_time = $study_data['study_time'];
+    $study_id =  $study_data['tag_id'];
+}
+$study_hour = number_format(floor((int)$study_time / 60), 0);
+$study_mimute = number_format((int)$study_time % 60, 0);
+
+// idからタグネームを取り出す
+$stmt = $pdo->query("SELECT tag_name FROM tag WHERE id = $study_id");
+$study_tag_name = $stmt->fetch();
+
 //日本の東京時間に設定
 date_default_timezone_set("Asia/Tokyo");
 
@@ -65,15 +82,16 @@ if (!empty($_POST['tag_name'])) {
     変更時間入力
     <br>
     <select name="tag_name">
-        <option value="">タグを選択</option>
+        <option value=""><?php echo $study_tag_name['tag_name']; ?></option>
         <?php foreach($tags as $tag): ?>
         <option value="<?php echo $tag['id']; ?>"><?php echo $tag['tag_name']; ?></option>
         <?php endforeach; ?>
     </select>
+
     <input type="hidden" name="id" value="<?php echo $_GET['id'] ?>">
     <input type="hidden" name="date" value="<?php echo date("Y-m-d H:i:s"); ?>">
-    <input type="number" name="hour" value="<?php echo isset($_POST['hour']) ? $_POST['hour'] : "0"; ?>" min="0" max="23" required="required">h
-    <input type="number" name="minute" value="<?php echo isset($_POST['minute']) ? $_POST['minute'] : "0"; ?>" min="0" max="59" required="required">m
+    <input type="number" name="hour" value="<?php echo $study_hour ?>" min="0" max="23" required="required">h
+    <input type="number" name="minute" value="<?php echo $study_mimute ?>" min="0" max="59" required="required">m
     <br>
     <!-- エラーメッセージ表示 -->
     <div class="error_message">
