@@ -14,6 +14,7 @@ function modalOpen() {
   input_tag_name.value = array_num.options[array_num.selectedIndex].text;
   input_tag_name.type = 'text';
   input_tag_name.name = 'tag_name';
+  input_tag_name.className = 'edit_input_form';
   const input_tag_id = document.createElement('input');
   input_tag_id.type = 'hidden';
   input_tag_id.name = 'tag_id';
