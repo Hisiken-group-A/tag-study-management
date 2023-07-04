@@ -21,8 +21,12 @@ $study_hour = number_format(floor((int)$study_time / 60), 0);
 $study_mimute = number_format((int)$study_time % 60, 0);
 
 // idからタグネームを取り出す
-$stmt = $pdo->query("SELECT tag_name FROM tag WHERE id = $study_id");
-$study_tag_name = $stmt->fetch();
+$stmt = $pdo->query("SELECT tag_name,id FROM tag WHERE id = $study_id");
+$study_tags = $stmt->fetchAll();
+foreach ($study_tags as $study_tag) {
+    $study_tag_id = $study_tag['id'];
+    $study_tag_name = $study_tag['tag_name'];
+}
 
 //日本の東京時間に設定
 date_default_timezone_set("Asia/Tokyo");
@@ -31,7 +35,7 @@ date_default_timezone_set("Asia/Tokyo");
 $error_message = "";
 
 //勉強時間変更
-if (!empty($_POST['tag_name'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($_POST['hour'] == 0 && $_POST['minute'] == 0) {
         //エラーメッセージ
         $error_message = "0h0mは入力できません";
@@ -79,11 +83,11 @@ if (!empty($_POST['tag_name'])) {
 <div class="main">
 <h1>編集</h1>
 <!-- 勉強時間入力フォーム -->
-<form action="#" method="post" name="a">
+<form  method="post" name="a">
     勉強時間入力
     <br>
     <select name="tag_name">
-        <option value=""><?php echo $study_tag_name['tag_name']; ?></option>
+        <option value="<?php echo $study_tag_id; ?>"><?php echo $study_tag_name; ?></option>
         <?php foreach($tags as $tag): ?>
         <option value="<?php echo $tag['id']; ?>"><?php echo $tag['tag_name']; ?></option>
         <?php endforeach; ?>
@@ -95,11 +99,7 @@ if (!empty($_POST['tag_name'])) {
     <input type="number" name="minute" value="<?php echo $study_mimute ?>" min="0" max="59" required="required">m
     <br>
     <!-- エラーメッセージ表示 -->
-    <div class="error_message">
-        <?php if (mb_strlen($error_message) > 0) : ?>
-            <p>0h0mは入力できません</p>
-        <?php endif; ?>
-    </div>
+    <div class="error_message"><?php echo $error_message; ?></div>
     <input type="submit" value="決定">
 </form>
 </div>
