@@ -13,41 +13,44 @@ let eachTagName = [];
 
 let chart = null;
 
-NewGraphCount();
-getEachDayStudyTime(function(eachDayStudyTime) {
-    getAllTag(function(jsonTags) {
-        for(let i = 0; i < jsonTags.length; i++){
-            eachTagStudyTime[i] = 0;
-            eachTagName[i] = jsonTags[i].tag_name;
-        }
+makeGraphData();
 
-        for(let i = 0; i < eachDayStudyTime.length; i++){
-            for(let j = 0; j < jsonTags.length; j++){
-                if(eachDayStudyTime[i].tag_id == jsonTags[j].id){
-                    eachTagStudyTime[j] += Number(eachDayStudyTime[i].study_time);
-                    continue;
+//PHPからデータを取得し加工
+function makeGraphData(){
+    getEachDayStudyTime(function(eachDayStudyTime) {
+        getAllTag(function(jsonTags) {
+            // タグごとの勉強時間を全て0で初期化，タグ名を代入
+            for(let i = 0; i < jsonTags.length; i++){
+                eachTagStudyTime[i] = 0;
+                eachTagName[i] = jsonTags[i].tag_name;
+            }
+            //タグごとの勉強時間の合計を計算
+            for(let i = 0; i < eachDayStudyTime.length; i++){
+                for(let j = 0; j < jsonTags.length; j++){
+                    if(eachDayStudyTime[i].tag_id == jsonTags[j].id){
+                        eachTagStudyTime[j] += Number(eachDayStudyTime[i].study_time);
+                        continue;
+                    }
                 }
             }
-        }
-        for(let i = 0; i < jsonTags.length; i++){
-            if(eachTagStudyTime[i]==0){
-                eachTagName.splice(i, 1);
-                eachTagStudyTime.splice(i, 1);
-                i--;
+            //勉強時間が0のタグは表示しないため削除
+            for(let i = 0; i < jsonTags.length; i++){
+                if(eachTagStudyTime[i]==0){
+                    eachTagName.splice(i, 1);
+                    eachTagStudyTime.splice(i, 1);
+                    i--;
+                }
             }
-        }
-        for(let i = 0; i < eachTagName.length; i++){
-            console.log(eachTagName[i]);
-            console.log(eachTagStudyTime[i]);
-        }
-        NewGraph(eachTagName, eachTagStudyTime);
+            NewGraph();
+        });
     });
-});
+}
 
-function NewGraph (eachTagName, eachDayStudyTime) {
+function NewGraph () {
+    NewGraphCount();
     let context = document.querySelector("#graph").getContext('2d');
+    // チャートがすでに存在している場合は破棄して再描画する
     if (chart) {
-        // チャートがすでに存在している場合は破棄して再描画する
         chart.destroy();
     }
     if(eachTagName.length===0){
@@ -74,6 +77,7 @@ function NewGraph (eachTagName, eachDayStudyTime) {
     }
 }
 
+//グラフの年と月を表示
 function NewGraphCount() {
     let MonthCountHtml = '';
 
@@ -88,36 +92,7 @@ function back_graph_month() {
         year--; //年を1ずつ減らす
         month = 12; //12に戻る
     }
-
-    getEachDayStudyTime(function(eachDayStudyTime) {
-        getAllTag(function(jsonTags) {
-            for(let i = 0; i < jsonTags.length; i++){
-                eachTagStudyTime[i] = 0;
-                eachTagName[i] = jsonTags[i].tag_name;
-            }
-    
-            for(let i = 0; i < eachDayStudyTime.length; i++){
-                for(let j = 0; j < jsonTags.length; j++){
-                    if(eachDayStudyTime[i].tag_id == jsonTags[j].id){
-                        eachTagStudyTime[j] += Number(eachDayStudyTime[i].study_time);
-                        continue;
-                    }
-                }
-            }
-            for(let i = 0; i < jsonTags.length; i++){
-                if(eachTagStudyTime[i]==0){
-                    eachTagName.splice(i, 1);
-                    eachTagStudyTime.splice(i, 1);
-                    i--;
-                }
-            }
-            for(let i = 0; i < eachTagName.length; i++){
-                console.log(eachTagName[i]);
-                console.log(eachTagStudyTime[i]);
-            }
-            NewGraph(eachTagName, eachTagStudyTime);
-        });
-    });
+    makeGraphData();
 }
 
 function next_graph_month() {
@@ -126,35 +101,7 @@ function next_graph_month() {
         year++;
         month = 1;
     }
-    getEachDayStudyTime(function(eachDayStudyTime) {
-        getAllTag(function(jsonTags) {
-            for(let i = 0; i < jsonTags.length; i++){
-                eachTagStudyTime[i] = 0;
-                eachTagName[i] = jsonTags[i].tag_name;
-            }
-    
-            for(let i = 0; i < eachDayStudyTime.length; i++){
-                for(let j = 0; j < jsonTags.length; j++){
-                    if(eachDayStudyTime[i].tag_id == jsonTags[j].id){
-                        eachTagStudyTime[j] += Number(eachDayStudyTime[i].study_time);
-                        continue;
-                    }
-                }
-            }
-            for(let i = 0; i < jsonTags.length; i++){
-                if(eachTagStudyTime[i]==0){
-                    eachTagName.splice(i, 1);
-                    eachTagStudyTime.splice(i, 1);
-                    i--;
-                }
-            }
-            for(let i = 0; i < eachTagName.length; i++){
-                console.log(eachTagName[i]);
-                console.log(eachTagStudyTime[i]);
-            }
-            NewGraph(eachTagName, eachTagStudyTime);
-        });
-    });
+    makeGraphData();
 }
 
 function getAllTag(callback) {
