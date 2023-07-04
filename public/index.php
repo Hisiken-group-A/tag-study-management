@@ -126,7 +126,7 @@ if (!empty($_POST['tag_name'])) {
         </select>
       
         <input type="hidden" name="date" value="<?php echo date("Y-m-d H:i:s"); ?>">
-        <input type="number" name="hour" value=" <?php echo isset($_POST['hour']) ? $_POST['hour'] : "0"; ?>" min="0" max="23" required="required" id="time">
+        <input type="number" name="hour" value="<?php echo isset($_POST['hour']) ? $_POST['hour'] : "0"; ?>" min="0" max="23" required="required" id="time">
         <a href="" id="time_h">h</a>
         <input type="number" name="minute" value="<?php echo isset($_POST['minute']) ? $_POST['minute'] : "0"; ?>" min="0" max="59" required="required" id="time">
         <a href=""  id="time_m">m</a>
