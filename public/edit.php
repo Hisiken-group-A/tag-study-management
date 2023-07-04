@@ -21,8 +21,12 @@ $study_hour = number_format(floor((int)$study_time / 60), 0);
 $study_mimute = number_format((int)$study_time % 60, 0);
 
 // idからタグネームを取り出す
-$stmt = $pdo->query("SELECT tag_name FROM tag WHERE id = $study_id");
-$study_tag_name = $stmt->fetch();
+$stmt = $pdo->query("SELECT tag_name,id FROM tag WHERE id = $study_id");
+$study_tags = $stmt->fetchAll();
+foreach ($study_tags as $study_tag) {
+    $study_tag_id = $study_tag['id'];
+    $study_tag_name = $study_tag['tag_name'];
+}
 
 //日本の東京時間に設定
 date_default_timezone_set("Asia/Tokyo");
@@ -76,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     勉強時間入力
     <br>
     <select name="tag_name">
-        <option value=""><?php echo $study_tag_name['tag_name']; ?></option>
+        <option value="<?php echo $study_tag_id; ?>"><?php echo $study_tag_name; ?></option>
         <?php foreach($tags as $tag): ?>
         <option value="<?php echo $tag['id']; ?>"><?php echo $tag['tag_name']; ?></option>
         <?php endforeach; ?>
