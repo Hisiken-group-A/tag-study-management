@@ -8,41 +8,70 @@ let firstDay = firstDate.getDay(); //曜日のデータ
 let lastDate = new Date(year, month, 0); //今月の最終日
 let lastDayCount = lastDate.getDate();
 
+let eachTagStudyTime = [];
+let eachTagName = [];
+
+let chart = null;
+
 NewGraphCount();
 getEachDayStudyTime(function(eachDayStudyTime) {
-    getAllTag(function(tags) {
-        const eachTagStudyTime = [];
-        const eachTagName = [];
-        for(let i = 0; i < tags.length; i++){
+    getAllTag(function(jsonTags) {
+        for(let i = 0; i < jsonTags.length; i++){
             eachTagStudyTime[i] = 0;
+            eachTagName[i] = jsonTags[i].tag_name;
         }
+
         for(let i = 0; i < eachDayStudyTime.length; i++){
-            for(let j = 0; j < tags.length; j++){
-                if(eachDayStudyTime[i].tag_id == tags[j].id){
+            for(let j = 0; j < jsonTags.length; j++){
+                if(eachDayStudyTime[i].tag_id == jsonTags[j].id){
                     eachTagStudyTime[j] += Number(eachDayStudyTime[i].study_time);
-                    console.log(eachTagStudyTime[j]);
                     continue;
                 }
             }
         }
-        for(let i = 0; i < tags.length; i++){
-            // console.log(eachTagStudyTime[i]);
+        for(let i = 0; i < jsonTags.length; i++){
+            if(eachTagStudyTime[i]==0){
+                eachTagName.splice(i, 1);
+                eachTagStudyTime.splice(i, 1);
+                i--;
+            }
         }
+        for(let i = 0; i < eachTagName.length; i++){
+            console.log(eachTagName[i]);
+            console.log(eachTagStudyTime[i]);
+        }
+        NewGraph(eachTagName, eachTagStudyTime);
     });
-    NewGraph();
 });
 
-function NewGraph () {
-    let context = document.querySelector("#graph").getContext('2d')
-    new Chart(context, {
-        type: 'pie',
-        data: {
-            labels: ["数学","英語","プログラミング","SPI","ES"],
-            datasets: [{
-                data:[60, 20, 15, 10, 5]
-            }]
-        }
-    });
+function NewGraph (eachTagName, eachDayStudyTime) {
+    let context = document.querySelector("#graph").getContext('2d');
+    if (chart) {
+        // チャートがすでに存在している場合は破棄して再描画する
+        chart.destroy();
+    }
+    if(eachTagName.length===0){
+        chart = new Chart(context, {
+            type: 'pie',
+            data: {
+                labels: ['データがありません'],
+                datasets: [{
+                    data:[100],
+                    backgroundColor : 'rgba(128,128,128,0.5)',//塗りつぶす色
+                }],
+            }
+        });
+    } else {
+        chart = new Chart(context, {
+            type: 'pie',
+            data: {
+                labels: eachTagName,
+                datasets: [{
+                    data:eachTagStudyTime
+                }]
+            }
+        });
+    }
 }
 
 function NewGraphCount() {
@@ -60,25 +89,33 @@ function back_graph_month() {
         month = 12; //12に戻る
     }
 
-    NewGraphCount();
     getEachDayStudyTime(function(eachDayStudyTime) {
-        getAllTag(function(tags) {
-            const eachTagStudyTime = [];
-            for(let i = 0; i < tags.length; i++){
+        getAllTag(function(jsonTags) {
+            for(let i = 0; i < jsonTags.length; i++){
                 eachTagStudyTime[i] = 0;
+                eachTagName[i] = jsonTags[i].tag_name;
             }
+    
             for(let i = 0; i < eachDayStudyTime.length; i++){
-                for(let j = 0; j < tags.length; j++){
-                    if(eachDayStudyTime[i].tag_id == tags[j].id){
+                for(let j = 0; j < jsonTags.length; j++){
+                    if(eachDayStudyTime[i].tag_id == jsonTags[j].id){
                         eachTagStudyTime[j] += Number(eachDayStudyTime[i].study_time);
-                        console.log(eachTagStudyTime[j]);
                         continue;
                     }
                 }
             }
-            for(let i = 0; i < tags.length; i++){
-                // console.log(eachTagStudyTime[i]);
+            for(let i = 0; i < jsonTags.length; i++){
+                if(eachTagStudyTime[i]==0){
+                    eachTagName.splice(i, 1);
+                    eachTagStudyTime.splice(i, 1);
+                    i--;
+                }
             }
+            for(let i = 0; i < eachTagName.length; i++){
+                console.log(eachTagName[i]);
+                console.log(eachTagStudyTime[i]);
+            }
+            NewGraph(eachTagName, eachTagStudyTime);
         });
     });
 }
@@ -89,25 +126,33 @@ function next_graph_month() {
         year++;
         month = 1;
     }
-    NewGraphCount();
     getEachDayStudyTime(function(eachDayStudyTime) {
-        getAllTag(function(tags) {
-            const eachTagStudyTime = [];
-            for(let i = 0; i < tags.length; i++){
+        getAllTag(function(jsonTags) {
+            for(let i = 0; i < jsonTags.length; i++){
                 eachTagStudyTime[i] = 0;
+                eachTagName[i] = jsonTags[i].tag_name;
             }
+    
             for(let i = 0; i < eachDayStudyTime.length; i++){
-                for(let j = 0; j < tags.length; j++){
-                    if(eachDayStudyTime[i].tag_id == tags[j].id){
+                for(let j = 0; j < jsonTags.length; j++){
+                    if(eachDayStudyTime[i].tag_id == jsonTags[j].id){
                         eachTagStudyTime[j] += Number(eachDayStudyTime[i].study_time);
-                        console.log(eachTagStudyTime[j]);
                         continue;
                     }
                 }
             }
-            for(let i = 0; i < tags.length; i++){
-                // console.log(eachTagStudyTime[i]);
+            for(let i = 0; i < jsonTags.length; i++){
+                if(eachTagStudyTime[i]==0){
+                    eachTagName.splice(i, 1);
+                    eachTagStudyTime.splice(i, 1);
+                    i--;
+                }
             }
+            for(let i = 0; i < eachTagName.length; i++){
+                console.log(eachTagName[i]);
+                console.log(eachTagStudyTime[i]);
+            }
+            NewGraph(eachTagName, eachTagStudyTime);
         });
     });
 }
