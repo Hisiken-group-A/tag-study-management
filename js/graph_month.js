@@ -8,6 +8,7 @@ let firstDay = firstDate.getDay(); //曜日のデータ
 let lastDate = new Date(year, month, 0); //今月の最終日
 let lastDayCount = lastDate.getDate();
 
+
 let eachTagStudyTime = [];
 let eachTagName = [];
 

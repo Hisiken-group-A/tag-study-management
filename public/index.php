@@ -51,16 +51,13 @@ if (!empty($_POST['tag_name'])) {
     <title>TAG-STUDY-MANAGEMENT</title>
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/index.css">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Beginner&family=Zen+Maru+Gothic&display=swap" rel="stylesheet">
-
+    
     <link rel="preconnect" href="https://fonts.googleapis.com"> 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
     <link href="https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Beginner&family=M+PLUS+1&family=Zen+Maru+Gothic&display=swap" rel="stylesheet">
 </head>
 <body>
+
 <?php include('../inc/tab.php'); ?>
 
 <div class="box">
@@ -79,12 +76,13 @@ if (!empty($_POST['tag_name'])) {
     </form>
 
     <br>
+    <br>
     <!-- タグ編集・削除フォーム -->
     <form action="?action=change_or_delete" method="post">
         <h3>タグの削除/変更</h3>
         <!-- タグ削除フォーム-->
         <div class ="tag_ya">
-        <select id="intext" name="tag_id">
+        <select id="intext" class="tag_edit_select" name="tag_id">
             タグを選択
             <option value="" >タグを選択</option>
             <?php  foreach($tags as $tag): ?>
@@ -114,6 +112,7 @@ if (!empty($_POST['tag_name'])) {
     <br>
     <br>
     <br>
+    <br>
 
     <!-- 勉強時間入力フォーム -->
     <form action="index.php" method="post" name="a">
@@ -127,7 +126,7 @@ if (!empty($_POST['tag_name'])) {
         </select>
       
         <input type="hidden" name="date" value="<?php echo date("Y-m-d H:i:s"); ?>">
-        <input type="number" name="hour" value=" <?php echo isset($_POST['hour']) ? $_POST['hour'] : "0"; ?>" min="0" max="23" required="required" id="time">
+        <input type="number" name="hour" value="<?php echo isset($_POST['hour']) ? $_POST['hour'] : "0"; ?>" min="0" max="23" required="required" id="time">
         <a href="" id="time_h">h</a>
         <input type="number" name="minute" value="<?php echo isset($_POST['minute']) ? $_POST['minute'] : "0"; ?>" min="0" max="59" required="required" id="time">
         <a href=""  id="time_m">m</a>

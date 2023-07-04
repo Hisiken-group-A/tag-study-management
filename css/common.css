@@ -9,12 +9,7 @@
     box-sizing: border-box;
     color: #393939;
 
-    /*
-    font-family: 'Edu VIC WA NT Beginner', cursive;
-    font-family: 'Zen Maru Gothic', sans-serif;
-    */
-
-    font-family: 'M PLUS 1', sans-serif;
+    font-family: 'M PLUS 1', sans-serif,'Zen Maru Gothic', sans-serif;
 }
 
 .tab {
@@ -49,7 +44,7 @@ li{
 .Index a {
 	background-color: #C2ADC9;
 	border: 10px solid #C2ADC9;
-    padding:  5px 198px;
+    padding:  5px 176px;
     border-top-left-radius: 100px 70px;
     border-top-right-radius: 100px 70px;
 
@@ -60,13 +55,13 @@ li{
 	position: absolute;
 	text-decoration: none;
     top: 10px;
-    left:324px;
+    left:308px;
 }
 
 .Graph_week a{
     background-color: #D9E1E2;
 	border: 10px solid #D9E1E2;
-    padding:  5px 173px;
+    padding:  5px 151px;
     border-top-left-radius: 100px 70px;
     border-top-right-radius: 100px 70px;
 }
@@ -76,13 +71,13 @@ li{
     position: absolute;
 	text-decoration: none;
     top: 10px;
-    right: 324px;
+    right: 306px;
 }
 
 .Graph_month a{
     background-color: #88BFCA;
 	border: 10px solid #88BFCA;
-    padding:  5px 173px;
+    padding:  5px 151px;
     border-top-left-radius: 100px 70px;
     border-top-right-radius: 100px 70px;
 }
@@ -97,7 +92,7 @@ li{
 .Month a{
     background-color: #EF90B5;
 	border: 10px solid #EF90B5;
-    padding:  5px 210px;
+    padding:  5px 188px;
     border-top-left-radius: 100px 70px;
     border-top-right-radius: 100px 70px;
 }
@@ -106,7 +101,7 @@ li{
     float:left;
     position:  absolute;        
     padding:  15px 720px;    
-    top: 56px;         
+    top: 61px;         
 }
 
 .bottom{
