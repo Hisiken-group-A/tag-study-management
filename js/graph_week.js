@@ -2,25 +2,22 @@
 
 let date = new Date(); //現在の日時
 let year = date.getFullYear(); //年のデータ
-let month = date.getMonth() + 1; //月のデータ
-let day = date.getDay();
-let firstDate = new Date(year, month - 1, 1); //現在の日時
-let firstDay = firstDate.getDay(); //曜日のデータ
-let lastDate = new Date(year, month, 0); //今月の最終日
-let lastDayCount = lastDate.getDate();
-let Sunday  = date - day;
+let month = date.getMonth(); //月のデータ
+let day = date.getDate(); //日のデータ
+
+let Sunday  = day - date.getDay();
 let Saturday = Sunday + 6;
 let StartSunday = new Date(year, month, Sunday);
 let EndSaturday = new Date(year, month, Saturday, 23,59,59,999);
 
-let StartDate = (StartSunday.getMonth() + 1) + "/" + StartSunday.getDate()
-let endDate = (EndSaturday.getMonth() + 1) + "/" + EndSaturday.getDate()
+let StartDate = (StartSunday.getMonth() + 1) + "/" + StartSunday.getDate();
+let endDate = (EndSaturday.getMonth() + 1) + "/" + EndSaturday.getDate();
 
+let WeekCountHtml = '';
 
-
-let nowGraph;
 
 window.onload = function () {
+    WeekCountHtml = '<h1>' + StartDate + ' 〜 ' + endDate + '</h1>';
     let context_bar = document.querySelector("#graph_bar").getContext('2d');
     new Chart(context_bar, {
         type: 'bar',
@@ -68,6 +65,29 @@ window.onload = function () {
         options: {
             responsive: false,
         }
-    });
-    return [startDate, EndDate];
+    }
+    );
+    document.querySelector('#Sunday_Saturday').innerHTML = WeekCountHtml;
 };
+
+function New_Graph_Week(startDate, endDate) {
+    WeekCountHtml = '<h1>' + startDate + ' 〜 ' + endDate + '</h1>';
+    document.querySelector('#Sunday_Saturday').innerHTML = WeekCountHtml;
+  }
+
+function back_graph_week() {
+    StartSunday.setDate(StartSunday.getDate() - 7);
+    EndSaturday.setDate(EndSaturday.getDate() - 7);
+    let startDate = (StartSunday.getMonth() + 1) + "/" + StartSunday.getDate();
+    let endDate = (EndSaturday.getMonth() + 1) + "/" + EndSaturday.getDate();
+    New_Graph_Week(startDate, endDate);
+}
+
+function next_graph_week() {
+    StartSunday.setDate(StartSunday.getDate() + 7);
+    EndSaturday.setDate(EndSaturday.getDate() + 7);
+    let startDate = (StartSunday.getMonth() + 1) + "/" + StartSunday.getDate();
+    let endDate = (EndSaturday.getMonth() + 1) + "/" + EndSaturday.getDate();
+    New_Graph_Week(startDate, endDate);
+    
+}

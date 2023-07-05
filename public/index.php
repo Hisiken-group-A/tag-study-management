@@ -71,7 +71,7 @@ if (!empty($_POST['tag_name'])) {
     <!-- タグ追加フォーム -->
     <form action="?action=add_tag" method="post">
         <h3>タグの追加</h3>
-        <input type="text" id="intext" name="tag_name">
+        <input type="text" id="intext" name="tag_name" required="required">
         <input type="submit" id="btn" value="追加">
     </form>
 
@@ -126,7 +126,7 @@ if (!empty($_POST['tag_name'])) {
         </select>
       
         <input type="hidden" name="date" value="<?php echo date("Y-m-d H:i:s"); ?>">
-        <input type="number" name="hour" value=" <?php echo isset($_POST['hour']) ? $_POST['hour'] : "0"; ?>" min="0" max="23" required="required" id="time">
+        <input type="number" name="hour" value="<?php echo isset($_POST['hour']) ? $_POST['hour'] : "0"; ?>" min="0" max="23" required="required" id="time">
         <a href="" id="time_h">h</a>
         <input type="number" name="minute" value="<?php echo isset($_POST['minute']) ? $_POST['minute'] : "0"; ?>" min="0" max="59" required="required" id="time">
         <a href=""  id="time_m">m</a>

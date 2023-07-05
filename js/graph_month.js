@@ -9,10 +9,10 @@ let lastDate = new Date(year, month, 0); //今月の最終日
 let lastDayCount = lastDate.getDate();
 
 window.onload = function () {
+    Graph();
     NewGraph();
-    NewGraphCount();
 };
-function NewGraph () {
+function Graph () {
     let context = document.querySelector("#graph").getContext('2d')
     new Chart(context, {
         type: 'pie',
@@ -25,11 +25,12 @@ function NewGraph () {
     });
 }
 
-function NewGraphCount() {
+function NewGraph() {
 let MonthCountHtml = '';
 
 MonthCountHtml = '<h1>' + year + '/' + month + '</h1>';
 
+NewGraph;
 document.querySelector('#MonthCount').innerHTML = MonthCountHtml;
 }
 
@@ -40,7 +41,7 @@ function back_graph_month() {
         year--; //年を1ずつ減らす
         month = 12; //12に戻る
     }
-    NewGraphCount();
+    NewGraph();
 }
 
 function next_graph_month() {
@@ -49,5 +50,5 @@ function next_graph_month() {
         year++;
         month = 1;
     }
-    NewGraphCount();
+    NewGraph();
 }
