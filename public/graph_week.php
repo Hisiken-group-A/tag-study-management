@@ -17,9 +17,11 @@
 
 <div class="main">
 <div id="next_back_button">
-    <button id="back" onclick="back()"><</button>
-    <button id="next" onclick="next()">></button>
-    <span id="Sunday"></span>ー<span id="Saturday"></span>
+    <button id="back_graph_week" onclick="back_graph_week()"><</button>
+    <button id="next_graph_week" onclick="next_graph_week()">></button>
+</div>
+
+<div id="Sunday_Saturday">
 </div>
 <canvas id="graph_bar" class="graph_class_bar"></canvas>
 <canvas id="graph_pie" class="graph_class_pie"></canvas>

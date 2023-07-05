@@ -83,7 +83,6 @@ function NewGraphCount() {
     let MonthCountHtml = '';
 
     MonthCountHtml = '<h1>' + year + '/' + month + '</h1>';
-
     document.querySelector('#MonthCount').innerHTML = MonthCountHtml;
 }
 

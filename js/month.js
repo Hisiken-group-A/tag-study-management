@@ -89,7 +89,6 @@ function NewCalendar(studyTimeJson) {
     createCalendar(studyTimeJson);
 }
 
-//前の月を表示
 function back() {
     month--; //1ヶ月ずつマイナス
     month_Eng = month_English[month - 1];
@@ -108,15 +107,12 @@ function back() {
     });
 }
 
-//次の月を表示
 function next() {
     month++;
-    month_Eng = month_English[month + 1];
+    month_Eng = month_English[month - 1];
     if (month > 12) {
         year++;
         month = 1;
-    }
-    if(month > 11) {
         month_Eng = month_English[0];
     }
     getTotalStudyTime(function(response) {

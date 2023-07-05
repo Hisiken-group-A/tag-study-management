@@ -71,7 +71,7 @@ if (!empty($_POST['tag_name'])) {
     <!-- タグ追加フォーム -->
     <form action="?action=add_tag" method="post">
         <h3>タグの追加</h3>
-        <input type="text" id="intext" name="tag_name">
+        <input type="text" id="intext" name="tag_name" required="required">
         <input type="submit" id="btn" value="追加">
     </form>
 
