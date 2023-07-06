@@ -84,9 +84,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <h1>編集</h1>
 <!-- 勉強時間入力フォーム -->
 <form  method="post" name="a">
-    勉強時間入力
+    <h3>勉強時間入力</h3>
     <br>
-    <select name="tag_name">
+    <div class="in">
+    <select name="tag_name" id="intext">
         <option value="<?php echo $study_tag_id; ?>"><?php echo $study_tag_name; ?></option>
         <?php foreach($tags as $tag): ?>
         <option value="<?php echo $tag['id']; ?>"><?php echo $tag['tag_name']; ?></option>
@@ -95,12 +96,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <input type="hidden" name="id" value="<?php echo $_GET['id'] ?>">
     <input type="hidden" name="date" value="<?php echo date("Y-m-d H:i:s"); ?>">
-    <input type="number" name="hour" value="<?php echo $study_hour ?>" min="0" max="23" required="required">h
-    <input type="number" name="minute" value="<?php echo $study_mimute ?>" min="0" max="59" required="required">m
+    <input type="number" name="hour" value="<?php echo $study_hour ?>" min="0" max="23" required="required" id="time">
+    <a href="" id="time_h">h</a>
+    <input type="number" name="minute" value="<?php echo $study_mimute ?>" min="0" max="59" required="required" id="time">
+    <a href=""  id="time_m">m</a>
     <br>
     <!-- エラーメッセージ表示 -->
     <div class="error_message"><?php echo $error_message; ?></div>
-    <input type="submit" value="決定">
+    <input type="submit" value="決定" id="btn">
+    </div>
 </form>
 </div>
 

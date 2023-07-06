@@ -17,16 +17,17 @@
 
 <div class="main">
 <div id="next_back_button">
-    <button id="back_graph_week" onclick="back_graph_week()"><</button>
-    <button id="next_graph_week" onclick="next_graph_week()">></button>
+    <button id="back_graph_week" onclick="back_graph_week()">＜</button>
+    <div id="Sunday_Saturday"></div>
+    <button id="next_graph_week" onclick="next_graph_week()">＞</button>
 </div>
 
-<div id="Sunday_Saturday">
-</div>
+<div class="graph-G">
 <canvas id="graph_bar" class="graph_class_bar"></canvas>
 <canvas id="graph_pie" class="graph_class_pie"></canvas>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="../js/graph_week.js"></script>
+</div>
 </div>
 </body>
 </html>

@@ -29,3 +29,118 @@
 .right{
     background-color: #EF90B5;
 }
+
+
+h1{
+    font-size: 40px;
+    font-weight: normal;
+    margin-bottom: 40px;
+}
+
+h3{
+    font-size: 30px;
+    font-weight: normal;
+    margin-bottom: 0px;
+  }
+  
+  .main{
+    margin:200px 0px 0px 300px ;
+  }
+  
+  #intext{
+    margin: 10px 15px 10px 100px;
+    height: 50px;
+    width: 300px;
+    border-radius: 4px;
+    border: none;
+    box-shadow: 0 0 0 3px #B2B2B2 inset;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 0px 10px;
+    font-size: 18px;
+  }
+  
+  #intext:focus {
+    outline: 0;
+    /*
+    box-shadow: 0 0 0 3.5px #989bb0 inset;
+    */
+  }
+  
+  #btn{
+    padding: 7px 10px;
+    border: 3px solid #B2B2B2;
+    border-radius: 4px;
+    background: #fff;
+    font-size: 20px;
+    height: 50px;
+    margin: 10px 0 10px 0;
+  }
+  
+  #btn:hover {
+    color: #fff;
+    background: #B2B2B2;
+  }
+  
+  select:focus {
+    outline: none; /* focus 時のデフォルトの枠線を消す */
+  }
+  
+  .tag_ya::after{
+    position: absolute;
+    top: 408.5px; /* 矢印の位置 */
+    right: 755px; /* 矢印の位置 */
+    width: 10px; /* 矢印の大きさ */
+    height: 10px; /* 矢印の大きさ */
+    border-top: 3px solid #B2B2B2; /* 矢印の線 */
+    border-right: 3px solid #B2B2B2; /* 矢印の線 */
+    -webkit-transform: rotate(135deg); /* 矢印の傾き */
+    transform: rotate(135deg); /* 矢印の傾き */
+    pointer-events: none; /* 矢印部分もクリック可能にする */
+    content: ""; 
+  }
+  
+  .time_ya::after{
+    position: absolute;
+    top: 613px; /* 矢印の位置 */
+    right: 755px; /* 矢印の位置 */
+    width: 10px; /* 矢印の大きさ */
+    height: 10px; /* 矢印の大きさ */
+    border-top: 3px solid #B2B2B2; /* 矢印の線 */
+    border-right: 3px solid #B2B2B2; /* 矢印の線 */
+    -webkit-transform: rotate(135deg); /* 矢印の傾き */
+    transform: rotate(135deg); /* 矢印の傾き */
+    pointer-events: none; /* 矢印部分もクリック可能にする */
+    content: ""; 
+  }
+  
+  #time{
+    padding: 7px 10px;
+    border: 3px solid #B2B2B2;
+    border-radius: 4px;
+    background: #fff;
+    font-size: 20px;
+    height: 50px;
+    margin: 10px 0 10px 0;
+  }
+  
+  #time_h{
+    text-decoration-line: none;
+    color:inherit;
+    font-size: 30px;
+    padding: 0px 7px 0px 3px;
+    margin: 10px 0 10px 0;
+  }
+  
+  #time_m{
+    text-decoration-line: none;
+    color:inherit;
+    font-size: 30px;
+    padding: 0px 15px 0px 3px;
+    margin: 10px 0 10px 0;
+  }
+
+  .in{
+      display: flex;
+  }
