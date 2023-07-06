@@ -63,6 +63,26 @@ function NewGraph () {
                     data:[100],
                     backgroundColor : 'rgba(128,128,128,0.5)',//塗りつぶす色
                 }],
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                var label = context.label || '';
+        
+                                if (label) {
+                                    label += ': ';
+                                }
+                                label += context.parsed + '%';
+                                return label;
+                            }
+                        }
+                    },
+                }
             }
         });
     } else {
@@ -73,6 +93,26 @@ function NewGraph () {
                 datasets: [{
                     data:eachTagStudyTime
                 }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                var label = context.label || '';
+        
+                                if (label) {
+                                    label += ': ';
+                                }
+                                label += context.parsed + '%';
+                                return label;
+                            }
+                        }
+                    },
+                }
             }
         });
     }

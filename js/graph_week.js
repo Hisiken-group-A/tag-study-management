@@ -48,6 +48,24 @@ window.onload = function () {
             },
             y: {
                 stacked: true
+            },
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            var label = context.label || '';
+    
+                            if (label) {
+                                label += ': ';
+                            }
+                            label += context.parsed + '%';
+                            return label;
+                        }
+                    }
+                },
             }
         },
         responsive: false
@@ -64,6 +82,24 @@ window.onload = function () {
         },
         options: {
             responsive: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            var label = context.label || '';
+    
+                            if (label) {
+                                label += ': ';
+                            }
+                            label += context.parsed + '%';
+                            return label;
+                        }
+                    }
+                },
+            }
         }
     }
     );
