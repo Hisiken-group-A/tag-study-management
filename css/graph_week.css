@@ -31,5 +31,53 @@
 }
 
 .main{
-    margin:10% 30% 0% 30%;
+    
+}
+
+#back_graph_week{
+    font-size: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid #B2B2B2;
+    background-color: rgb(255, 255, 255);
+    margin-right: 80px;
+    text-align: center;
+}
+
+#next_graph_week{
+    font-size: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid #B2B2B2;
+    background-color: rgb(255, 255, 255);
+}
+
+#Sunday_Saturday{
+    padding: 0 70px;
+    font-size: 20px;
+    min-width: 450px;
+}
+
+#next_back_button{
+    display: flex;
+    padding-bottom: 50px;
+    padding-left: 50px;
+}
+
+#graph_bar{
+    max-width: 500px;
+    max-height: 400px;
+    margin: auto;
+}
+
+#graph_pie{
+    max-width: 500px;
+    max-height: 500px;
+    margin: auto;
+}
+
+.graph-G{
+    display: flex;
 }
