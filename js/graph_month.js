@@ -159,7 +159,7 @@ function getAllTag(callback) {
 function getEachDayStudyTime(callback) {
     let xhr = new XMLHttpRequest();
     //openの第三引数は非同期(true)で行うと言う指定
-    xhr.open("GET",`../public/change-month.php?type=each_day&year=${year}&month=${month}`,true); 
+    xhr.open("GET",`../public/change-month.php?type=each_day&year=${year}&month=${month}`,true);
     xhr.responseType = "text"; //結果をテキスト形式で取得
     xhr.addEventListener('load', function(event){
         var param = JSON.parse(xhr.responseText); //JSONデコード
