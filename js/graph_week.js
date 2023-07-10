@@ -11,6 +11,15 @@ let StartSunday = new Date(year, month, Sunday);
 let EndSaturday = new Date(year, month, Saturday, 23,59,59,999);
 let nextDay = new Date(StartSunday);
 
+let formattedStartSunday = '';
+let formattedEndSaturday = '';
+// 開始日
+formattedStartSunday = StartSunday.getFullYear() + "-" + ("0" + (StartSunday.getMonth() + 1)).slice(-2) + "-" + ("0" + StartSunday.getDate()).slice(-2); // yyyy-mm-dd形式の文字列を作成
+//終了日
+formattedEndSaturday = EndSaturday.getFullYear() + "-" + ("0" + (EndSaturday.getMonth() + 1)).slice(-2) + "-" + ("0" + EndSaturday.getDate()).slice(-2); // yyyy-mm-dd形式の文字列を作成
+console.log(formattedStartSunday); // yyyy-mm-dd形式の日付を表示
+console.log(formattedEndSaturday); // yyyy-mm-dd形式の日付を表示
+
 let StartDate = (StartSunday.getMonth() + 1) + "/" + StartSunday.getDate();
 let endDate = (EndSaturday.getMonth() + 1) + "/" + EndSaturday.getDate();
 
@@ -18,9 +27,6 @@ let WeekCountHtml = '';
 
 let eachTagStudyTime = [];
 let eachTagName = [];
-
-let formattedStartSunday = '';
-let formattedEndSaturday = '';
 
 let weekBarDataLabel = [];
 
@@ -171,7 +177,7 @@ function New_Graph_Week(startDate, endDate) {
 function back_graph_week() {
     StartSunday.setDate(StartSunday.getDate() - 7);
     EndSaturday.setDate(EndSaturday.getDate() - 7);
-    console.log(StartSunday);
+
     // 開始日
     var year = StartSunday.getFullYear(); // 年を取得
     var month = ("0" + (StartSunday.getMonth() + 1)).slice(-2); // 月を取得（0埋め）
@@ -188,7 +194,7 @@ function back_graph_week() {
 
     let startDate = (StartSunday.getMonth() + 1) + "/" + StartSunday.getDate();
     let endDate = (EndSaturday.getMonth() + 1) + "/" + EndSaturday.getDate();
-    console.log(StartSunday);
+
     New_Graph_Week(startDate, endDate);
     makeGraphData();
 }
