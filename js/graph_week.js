@@ -9,6 +9,7 @@ let Sunday  = day - date.getDay();
 let Saturday = Sunday + 6;
 let StartSunday = new Date(year, month, Sunday);
 let EndSaturday = new Date(year, month, Saturday, 23,59,59,999);
+let nextDay = new Date(StartSunday);
 
 let StartDate = (StartSunday.getMonth() + 1) + "/" + StartSunday.getDate();
 let endDate = (EndSaturday.getMonth() + 1) + "/" + EndSaturday.getDate();
@@ -54,12 +55,14 @@ function makeGraphData(){
                     i--;
                 }
             }
-
+            
+            //棒グラフの横軸のラベル（日付）を作成しようとしているが未完成
             for(let i=0; i<7; i++){
-                weekBarDataLabel[i]+=StartSunday+i;
+                weekBarDataLabel[i]+=nextDay;
+                nextDay.setDate((StartSunday.getDate() + i));
             }
+            //確認用
             console.log(weekBarDataLabel);
-
             console.log(eachTagName);
             console.log(eachDayStudyTime);
             NewGraph();
