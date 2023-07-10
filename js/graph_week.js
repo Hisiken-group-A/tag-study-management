@@ -20,15 +20,19 @@ formattedEndSaturday = EndSaturday.getFullYear() + "-" + ("0" + (EndSaturday.get
 console.log(formattedStartSunday); // yyyy-mm-dd形式の日付を表示
 console.log(formattedEndSaturday); // yyyy-mm-dd形式の日付を表示
 
-let StartDate = (StartSunday.getMonth() + 1) + "/" + StartSunday.getDate();
-let endDate = (EndSaturday.getMonth() + 1) + "/" + EndSaturday.getDate();
-
+let StartDate = (StartSunday.getMonth() + 1) + "/" + StartSunday.getDate(); //7/9
+let endDate = (EndSaturday.getMonth() + 1) + "/" + EndSaturday.getDate();   //7/15
+// console.log(StartSunday.getDate() + 1); //15
 let WeekCountHtml = '';
 
 let eachTagStudyTime = [];
 let eachTagName = [];
 
+let weekBarMonthLabel = [];
 let weekBarDataLabel = [];
+let weekLabel = [];
+
+let matching_date = [];
 
 let pie = null;
 let bar = null;
@@ -49,6 +53,7 @@ function makeGraphData(){
                 for(let j = 0; j < jsonTags.length; j++){
                     if(eachDayStudyTime[i].tag_id == jsonTags[j].id){
                         eachTagStudyTime[j] += Number(eachDayStudyTime[i].study_time);
+                        console.log(eachTagStudyTime[j]);
                         continue;
                     }
                 }
@@ -63,12 +68,17 @@ function makeGraphData(){
             }
             
             //棒グラフの横軸のラベル（日付）を作成しようとしているが未完成
+            // for(let i=0; i<7; i++){
+            //     weekBarDataLabel[i]+=nextDay;
+            //     nextDay.setDate((StartSunday.getDate() + i));
+            // }
             for(let i=0; i<7; i++){
-                weekBarDataLabel[i]+=nextDay;
-                nextDay.setDate((StartSunday.getDate() + i));
+                weekBarMonthLabel[i] = (StartSunday.getMonth() + 1) + "/";
+                weekBarDataLabel[i] = (StartSunday.getDate() + i);
+                weekLabel[i] = (weekBarMonthLabel[i] + weekBarDataLabel[i]);
             }
             //確認用
-            console.log(weekBarDataLabel);
+            console.log(matching_date);
             console.log(eachTagName);
             console.log(eachDayStudyTime);
             NewGraph();
@@ -81,58 +91,127 @@ function NewGraph(){
     if (bar) {
         bar.destroy();
     }
-    bar = new Chart(context_bar, {
-        type: 'bar',
-        data: {
-            labels: ['6/11', '6/12', '6/13', '6/14', '6/15', '6/16', '6/17'],
-            datasets: [{
-                label: "数学",
-                data: [70, 0, 200, 360, 100, 60, 20],
-            },{
-                label: "英語",
-                data: [50, 30, 100, 0, 200, 60, 0],
-            },{
-                label: "プログラミング",
-                data: [30, 60, 100, 0, 200, 0, 100],
-            },{
-                label: "SPI",
-                data: [0, 0, 100, 0, 0, 0, 0],
-            },{
-                label: "ES",
-                data: [0, 0, 0, 0, 0, 0, 60],
-            }],
-        },
-        options: {
-            scales: {
-                x: {
-                    stacked: true,
-                }
+    if(eachTagName.length == 0) {
+        bar = new Chart(context_bar, {
+            type: 'bar',
+            data: {
+                labels: [weekLabel[0], weekLabel[1], weekLabel[2], weekLabel[3], weekLabel[4], weekLabel[5], weekLabel[6]],
+                datasets: [{
+                    label: "",
+                    data: [0, 0, 0, 0, 0, 0, 0],
+                },{
+                    label: "",
+                    data: [0, 0, 0, 0, 0, 0, 0],
+                },{
+                    label: "",
+                    data: [0, 0, 0, 0, 0, 0, 0],
+                },{
+                    label: "",
+                    data: [0, 0, 0, 0, 0, 0, 0],
+                },{
+                    label: "",
+                    data: [0, 0, 0, 0, 0, 0, 0],
+                }],
+                // datasets: [{
+                //     label: "数学",
+                //     data: [70, 0, 200, 360, 100, 60, 20],
+                // },{
+                //     label: "英語",
+                //     data: [50, 30, 100, 0, 200, 60, 0],
+                // },{
+                //     label: "プログラミング",
+                //     data: [30, 60, 100, 0, 200, 0, 100],
+                // },{
+                //     label: "SPI",
+                //     data: [0, 0, 100, 0, 0, 0, 0],
+                // },{
+                //     label: "ES",
+                //     data: [0, 0, 0, 0, 0, 0, 60],
+                // }],
             },
-            y: {
-                stacked: true
-            },
-            plugins: {
-                legend: {
-                    position: 'bottom'
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            var label = context.label || '';
-    
-                            if (label) {
-                                label += ': ';
-                            }
-                            label += context.parsed + '%';
-                            return label;
-                        }
+            options: {
+                scales: {
+                    x: {
+                        stacked: true,
                     }
                 },
-            }
-        },
-        responsive: false
-    });
-    
+                y: {
+                    stacked: true
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                var label = context.label || '';
+        
+                                if (label) {
+                                    label += ': ';
+                                }
+                                label += context.parsed + 'm';
+                                return label;
+                            }
+                        }
+                    },
+                }
+            },
+            responsive: false
+        });
+    } else {
+        bar = new Chart(context_bar, {
+            type: 'bar',
+            data: {
+                labels: [weekLabel[0], weekLabel[1], weekLabel[2], weekLabel[3], weekLabel[4], weekLabel[5], weekLabel[6]],
+                datasets: [{
+                    label: eachTagName[0],
+                    data: [eachTagStudyTime[0],0,0,eachTagStudyTime[0],0],
+                },{
+                    label: eachTagName[1],
+                    data: [eachTagStudyTime[0],eachTagStudyTime[1],eachTagStudyTime[2],eachTagStudyTime[3],eachTagStudyTime[4]],
+                },{
+                    label: eachTagName[2],
+                    data: [0,eachTagStudyTime[1],eachTagStudyTime[4],0],
+                },{
+                    label: eachTagName[3],
+                    data: [0,eachTagStudyTime[0],0,eachTagStudyTime[4]],
+                },{
+                    label: eachTagName[4],
+                    data: [eachTagStudyTime[1],eachTagStudyTime[2],eachTagStudyTime[4],0],
+                }],
+            },
+            options: {
+                scales: {
+                    x: {
+                        stacked: true,
+                    }
+                },
+                y: {
+                    stacked: true
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                var label = context.label || '';
+        
+                                if (label) {
+                                    label += ': ';
+                                }
+                                label += context.parsed + 'm';
+                                return label;
+                            }
+                        }
+                    },
+                }
+            },
+            responsive: false
+        });
+    }
     let context_pie = document.querySelector("#graph_pie").getContext('2d');
     if (pie) {
         pie.destroy();
