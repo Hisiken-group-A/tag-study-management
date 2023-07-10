@@ -1,16 +1,18 @@
 <?php
 
 require_once '../config/dbconnect.php'; 
+require_once '../class/Tag.php';
 
 $pdo = connect();
-
-$stmt = $pdo->query("SELECT * FROM tag");
-$tags = $stmt->fetchAll();
+$tag = new Tag($pdo);
+$tag->process_post();
+$tags = $tag->get_tag();
 
 //変更部分の勉強時間を抽出し◯h◯mに変換
 $study_id = $_GET['id'];
 $study_hour = "";
 $study_mimute = "";
+// 勉強時間情報を取得
 $stmt = $pdo->query("SELECT study_time,tag_id FROM study_time WHERE id = $study_id");
 $study_datas = $stmt->fetchAll();
 foreach ($study_datas as $study_data) {
@@ -20,7 +22,7 @@ foreach ($study_datas as $study_data) {
 $study_hour = number_format(floor((int)$study_time / 60), 0);
 $study_mimute = number_format((int)$study_time % 60, 0);
 
-// idからタグネームを取り出す
+// idからタグ名を取得
 $stmt = $pdo->query("SELECT tag_name,id FROM tag WHERE id = $study_id");
 $study_tags = $stmt->fetchAll();
 foreach ($study_tags as $study_tag) {
