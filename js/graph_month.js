@@ -76,7 +76,7 @@ function NewGraph () {
                                 if (label) {
                                     label += ': ';
                                 }
-                                label += context.parsed + '%';
+                                label += context.parsed + 'm';
                                 return label;
                             }
                         }
@@ -106,7 +106,7 @@ function NewGraph () {
                                 if (label) {
                                     label += ': ';
                                 }
-                                label += context.parsed + '%';
+                                label += context.parsed + 'm';
                                 return label;
                             }
                         }
