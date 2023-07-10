@@ -37,8 +37,6 @@ getEachDayStudyTime(function(response) {
 
 //カレンダー作成
 function createCalendar(studyTimeJson) {
-    createHtml = '<tb>' +  '<h1>' + year + '/' + month + month_Eng + '</h1>';
-    createHtml += '<table>' + '<tr>';
 
     const calendarElement = document.querySelector('#calendar');
    
@@ -51,32 +49,6 @@ function createCalendar(studyTimeJson) {
     for (let i = 0; i < weeks.length; i++) {
       createHtml += '<td>' + weeks[i] + '</td>';
     }
-    createHtml += '</tr>'; 
-
-    for (let n = 0; n < 6; n++) {
-        createHtml += '<tr>';
-        for (let d = 0; d < 7; d++) {
-            if (n == 0 && d < firstDay) {
-                createHtml += '<td></td>';
-            } else if (dayCount > lastDayCount) {
-                createHtml += '<td></td>';
-            } else {
-                //勉強時間表示
-                createHtml += '<td>' + dayCount;
-                let calendarDate = year + '-' + month + '-' + dayCount;
-                console.log(calendarDate);
-                for(let i = 0; i < studyTimeJson.length; i++){
-                    let date = new Date(studyTimeJson[i].date);
-                    let year = date.getFullYear();
-                    let month = date.getMonth() + 1;
-                    let day = date.getDate();
-                    let formattedDate = year + '-' + month + '-' + day;
-                    if(calendarDate==formattedDate){
-                        const hour = Math.floor(studyTimeJson[i].study_time / 60);
-                        const minuits = studyTimeJson[i].study_time % 60;
-                        createHtml += '<br>'+ '<div class="lt">' + '<a href="edit.php?id='+ studyTimeJson[i].id +'">' + hour + 'h' + minuits + 'm' + '</a>';
-                        createHtml += '  ';
-                        createHtml += '<a href="delete.php?id='+ studyTimeJson[i].id +'">' + '×' + '</a>' + '</div>';
     createHtml += '</tr>';
   
     for (let n = 0; n < 6; n++) {

@@ -19,15 +19,12 @@
 <div class="main">
 
 <div id="next_back_button">
-    <button id="back" onclick="back()">＜</button>
-    <button id="next" onclick="next()">＞</button>
+    <button id="back" onclick="back()"><</button>
+    <button id="next" onclick="next()">></button>
 </div>
 <div id="calendar"></div>
-<div class="add">
-    <h2>TOTAL</h2>
-    <div id="total"></div>
+<div id="total"></div>
 <script src="../js/month.js"></script>
-</div>
 
 </div>
 </body>
