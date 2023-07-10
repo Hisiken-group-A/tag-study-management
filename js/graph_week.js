@@ -104,6 +104,24 @@ function NewGraph(){
             },
             y: {
                 stacked: true
+            },
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            var label = context.label || '';
+    
+                            if (label) {
+                                label += ': ';
+                            }
+                            label += context.parsed + '%';
+                            return label;
+                        }
+                    }
+                },
             }
         },
         responsive: false
