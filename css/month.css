@@ -30,7 +30,6 @@
     background-color: #EF90B5;
 }
 
-
 #back{
     font-size: 30px;
     width: 60px;
@@ -63,6 +62,7 @@
     z-index: 2;
     position: absolute;
     left: 350px;
+    overflow: auto; /* スクロール機能を追加 */
 }
 
 .main{
@@ -90,20 +90,22 @@ th, td {
     width: 110px;
     text-align: left;
     padding: 0 30px 40px 5px;
+    overflow: hidden;
 }
 
 tr{
     max-height: 70px;
 }
 
-.lt{
+.lt {
     background-color: #EF90B5;
     text-align: center;
     border-top-right-radius: 50px 50px;
     border-bottom-right-radius: 50px 50px;
     padding: 0px 4px;
     font-size: 12px;
-    position: absolute;
+    position: relative; /* position: absolute; から修正 */
+    overflow: auto;
 }
 
 .lt a{
@@ -112,6 +114,10 @@ tr{
     font-size: 10px
 }
 
+.lt-container {
+    max-height: 19.5px;
+    overflow: auto;
+}
 
 .add{
     position: absolute;

@@ -72,7 +72,7 @@ function createCalendar(studyTimeJson) {
             if (calendarDate === formattedDate) {
               const hour = Math.floor(studyTimeJson[i].study_time / 60);
               const minutes = studyTimeJson[i].study_time % 60;
-              createHtml += '<br>' + '<div class="lt">' + '<a href="edit.php?id=' + studyTimeJson[i].id + '">' + hour + 'h' + minutes + 'm' + '</a>';
+              createHtml += '<br>' + '<div class="lt-container">' + '<div class="lt">' + '<a href="edit.php?id=' + studyTimeJson[i].id + '">' + hour + 'h' + minutes + 'm' + '</a>';
               createHtml += '<a href="delete.php?id='+ studyTimeJson[i].id +'">' + ' ' + '×' + '</a>' + '</div>';
               }
               }
