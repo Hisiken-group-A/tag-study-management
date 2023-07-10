@@ -37,13 +37,13 @@ getEachDayStudyTime(function(response) {
 
 //カレンダー作成
 function createCalendar(studyTimeJson) {
-    createHtml = '<h1>' + year + '/' + month + month_Eng + '</h1>';
+    createHtml = '<tb>' +  '<h1>' + year + '/' + month + month_Eng + '</h1>';
     createHtml += '<table>' + '<tr>';
 
     for (let i = 0; i < weeks.length; i++) {
         createHtml += '<td>' + weeks[i] + '</td>';
     }
-    createHtml += '</tr>';
+    createHtml += '</tr>'; 
 
     for (let n = 0; n < 6; n++) {
         createHtml += '<tr>';
@@ -66,8 +66,9 @@ function createCalendar(studyTimeJson) {
                     if(calendarDate==formattedDate){
                         const hour = Math.floor(studyTimeJson[i].study_time / 60);
                         const minuits = studyTimeJson[i].study_time % 60;
-                        createHtml += '<br>'+ '<a href="edit.php?id='+ studyTimeJson[i].id +'">' + hour + 'h' + minuits + 'm' + '</a>';
-                        createHtml += '<a href="delete.php?id='+ studyTimeJson[i].id +'">' + '×' + '</a>';
+                        createHtml += '<br>'+ '<div class="lt">' + '<a href="edit.php?id='+ studyTimeJson[i].id +'">' + hour + 'h' + minuits + 'm' + '</a>';
+                        createHtml += '  ';
+                        createHtml += '<a href="delete.php?id='+ studyTimeJson[i].id +'">' + '×' + '</a>' + '</div>';
                     }
                 }
                 createHtml += '</td>';
