@@ -13,6 +13,7 @@ let eachTagName = [];
 
 let chart = null;
 
+
 makeGraphData();
 
 //PHPからデータを取得し加工
